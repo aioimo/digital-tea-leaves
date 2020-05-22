@@ -1,0 +1,30 @@
+#canvas-radius {
+  width: 200px;
+  height: 200px;
+}
+
+table {
+  border: 1px solid black;
+}
+
+thead {
+  font-weight: bold;
+}
+
+td {
+  padding: 5px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.padding {
+  padding: 5px;
+}

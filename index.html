@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <title>Cells</title>
+  </head>
+  <body>
+    <div class="flex">
+      <canvas id="canvas-main" width="1000" height="1000"></canvas>
+      <div class="flex-col">
+        <table>
+          <thead>
+            <tr>
+              <td>Color</td>
+              <td>Count</td>
+              <td>Percentage</td>
+              <td>Change</td>
+            </tr>
+          </thead>
+          <tbody id="statistics"></tbody>
+        </table>
+        <br />
+        <div>
+          <div>Number of Iterations <span id="iterations"></span></div>
+          <div>
+            <button class="button" id="next">NEXT</button>
+            <button class="button" id="reset">RESET</button>
+            <button class="button" id="start">START</button>
+          </div>
+        </div>
+
+        <br />
+        <br />
+
+        <br />
+        <br />
+        <br />
+
+        <canvas id="canvas-radius" width="500" height="500"></canvas>
+      </div>
+    </div>
+
+    <script src="./js/util.js"></script>
+    <script src="./js/setup.js"></script>
+    <script src="./js/Matrix.js"></script>
+    <script src="./js/RadisDisplay.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
