@@ -4,14 +4,14 @@ var radius_ctx = radiusDisplay.getContext('2d');
 const W_100_RADIUS = radiusDisplay.width;
 const H_100_RADIUS = radiusDisplay.height;
 
-var RADIUS = 2;
 var LENGTH = RADIUS * 2 + 1;
 var MID = (LENGTH - 1) / 2;
 
 class RadiusDisplay {
-  constructor() {
+  constructor({ radius }) {
     this.squareSize = H_100_RADIUS / LENGTH;
     this.state = emptyMatrix(LENGTH, LENGTH);
+    this.radius = radius;
     this.draw();
     this.activeSquares();
   }
@@ -33,41 +33,18 @@ class RadiusDisplay {
   }
 
   activeSquares() {
+    const RADIUS = this.radius;
     for (let row = -RADIUS; row <= RADIUS; row++) {
       for (let col = -RADIUS; col <= RADIUS; col++) {
         if (row === 0 && col === 0) continue;
         // if (row % 2 === 1 && Math.abs(col % 2) === 1) continue;
-        if (row % 2 === 1 && Math.abs(col % 2) === 1) continue;
+        // if (row % 2 === 1 && Math.abs(col % 2) === 1) continue;
         // if (Math.abs(row) !== Math.abs(col)) continue;
+        if (!(row % 3 === 0 || col % 3 === 0)) continue;
 
         this.drawSquare(row + RADIUS, col + RADIUS, 'red');
       }
     }
-  }
-
-  neighbors(row, col) {
-    const matrix = this.state;
-    const l = matrix.length;
-    const radius = this.radius;
-    const results = {};
-
-    for (let i = -radius; i <= radius; i++) {
-      for (let j = -radius; j <= radius; j++) {
-        // if (i === 0 && j === 0) continue;
-        // if (Math.abs(i) !== Math.abs(j)) continue;
-        if (i % 2 === 1 && Math.abs(j % 2) === 1) continue;
-        // if (Math.abs(i) <= 1 || Math.abs(j) <= 3) continue;
-        // if (i % 3 !== 0 && j % 3 !== 0) continue;
-
-        const value = matrix[mod(row - i, l)][mod(col - j, l)];
-        if (results[value]) {
-          results[value]++;
-        } else {
-          results[value] = 1;
-        }
-      }
-    }
-    return results;
   }
 
   drawEmptySquare(row, col) {

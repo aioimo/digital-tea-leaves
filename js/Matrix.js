@@ -1,13 +1,13 @@
 const BORDER_WIDTH = 1;
 
 class Matrix {
-  constructor(colors = ['black', 'white'], size = 50) {
+  constructor(colors = ['black', 'white'], size = 50, radius = 2) {
     this.numberIterations = 0;
     this.colors = colors;
     this.size = size;
     this.state = randomMatrix(size, size, this.colors);
     this.squareSize = H_100 / this.state.length;
-    this.radius = 2;
+    this.radius = radius;
     this.stable = false;
     this.stats = {};
 
@@ -115,7 +115,7 @@ class Matrix {
 
   most(results) {
     const entries = Object.entries(results);
-    let threshold = 5;
+    let threshold = 3;
     let winners = [];
 
     entries.forEach(([state, count]) => {
@@ -142,18 +142,13 @@ class Matrix {
     const radius = this.radius;
     const results = {};
 
-    if (row_0 === 2 && col_0 === 2) {
-      console.log('Three down, three to the right....');
-      console.log(matrix[row_0][col_0]);
-    }
-
     for (let row = -radius; row <= radius; row++) {
       for (let col = -radius; col <= radius; col++) {
         // if (row === 0 && col === 0) continue;
         // if (Math.abs(row) !== Math.abs(col)) continue;
-        if (row % 2 === 1 && Math.abs(col % 2) === 1) continue;
+        // if (row % 2 === 1 && Math.abs(col % 2) === 1) continue;
         // if (Math.abs(row) <= 1 || Math.abs(col) <= 3) continue;
-        // if (row % 3 !== 0 && col % 3 !== 0) continue;
+        if (row % 3 !== 0 && col % 3 !== 0) continue;
 
         const value = matrix[mod(row_0 + row, l)][mod(col_0 + col, l)];
         if (results[value]) {
@@ -163,9 +158,7 @@ class Matrix {
         }
       }
     }
-    if (row_0 === 2 && col_0 === 2) {
-      console.log('results', results);
-    }
+
     return results;
   }
 

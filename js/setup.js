@@ -34,6 +34,7 @@ function createRow({ color }) {
 }
 
 const colors = ['green', 'white', 'yellow', 'purple', 'lightblue', 'black'];
+var RADIUS = 2;
 
 $iterations = document.getElementById('iterations');
 $tableBody = document.getElementById('statistics');

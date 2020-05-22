@@ -9,7 +9,7 @@ $next = document.getElementById('next');
 $reset = document.getElementById('reset');
 $start = document.getElementById('start');
 
-const m = new Matrix(colors, 10);
+const m = new Matrix(colors, 50, RADIUS);
 
 $next.onclick = function () {
   m.update();
@@ -20,7 +20,6 @@ $reset.onclick = function () {
 };
 
 $start.onclick = function () {
-  console.log('interval...', interval);
   if (interval) {
     clearInterval(interval);
     interval = null;
@@ -35,4 +34,4 @@ $start.onclick = function () {
   }
 };
 
-const rd = new RadiusDisplay();
+const rd = new RadiusDisplay({ radius: RADIUS });
