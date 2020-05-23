@@ -10,13 +10,22 @@ function colorChangeId(color) {
   return `${color}-change`;
 }
 
-const colors = ['green', 'blue', 'lightblue', 'magenta'];
+const $colors = document.getElementById('colors');
+
+const colorOptions = [
+  'yellow',
+  'purple',
+  'green',
+  'blue',
+  'lightblue',
+  'magenta',
+  'black',
+  'white',
+  'orange',
+  'red',
+];
 const radius = 6;
 const threshold = 0;
-
-// if (row === 0 && col === 0)
-// if (row % 2 === 1 && Math.abs(col % 2) === 1)
-// if (Math.abs(row) <= 1 || Math.abs(col) <= 3)
 
 const S = (row, col) => row % 2 === 1 && col % 2 === 1;
 const INVERTED_DIAMOND = (row, col, radius) =>
@@ -34,22 +43,26 @@ const WHAT_IS = (row, col) =>
 const GRID = () => false;
 const CIRCLE = (row, col, radius) => row ** 2 + col ** 2 > radius ** 2;
 
-const filterRadius = CIRCLE;
+const filterRadius = CRAZY;
+
+function clearAllRows() {
+  $tableBody.innerHTML = '';
+}
 
 function createRow({ color }) {
-  $col1 = document.createElement('td');
+  const $col1 = document.createElement('td');
   $col1.innerText = color;
 
-  $col2 = document.createElement('td');
+  const $col2 = document.createElement('td');
   $col2.id = colorCountId(color);
 
-  $col3 = document.createElement('td');
+  const $col3 = document.createElement('td');
   $col3.id = colorPercentageId(color);
 
-  $col4 = document.createElement('td');
+  const $col4 = document.createElement('td');
   $col4.id = colorChangeId(color);
 
-  $row = document.createElement('tr');
+  const $row = document.createElement('tr');
 
   $row.appendChild($col1);
   $row.appendChild($col2);
@@ -59,11 +72,31 @@ function createRow({ color }) {
   $tableBody.appendChild($row);
 }
 
+function createCheckbox({ color }) {
+  const $div = document.createElement('div');
+
+  const $input = document.createElement('input');
+  $input.type = 'checkbox';
+  $input.id = color;
+  $input.name = color;
+  $input.value = color;
+  $input.checked = random(['checked', null]);
+
+  const $label = document.createElement('label');
+  $label.innerText = color;
+  $label.for = color;
+
+  $div.appendChild($input);
+  $div.appendChild($label);
+
+  $colors.appendChild($div);
+}
+
+colorOptions.forEach((color) => {
+  createCheckbox({ color });
+});
+
 $iterations = document.getElementById('iterations');
 $points_of_contact = document.getElementById('points-of-contact');
 
 $tableBody = document.getElementById('statistics');
-
-colors.forEach((color) => {
-  createRow({ color });
-});

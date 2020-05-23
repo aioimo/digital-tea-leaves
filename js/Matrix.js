@@ -41,6 +41,10 @@ class Matrix {
     this.radius = r;
   }
 
+  updateColors(colors) {
+    this.colors = colors;
+  }
+
   formatPercentage(n) {
     const p = n ? (n * 100) / this.size ** 2 : 0;
     return p.toFixed(2);

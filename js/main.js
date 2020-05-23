@@ -5,16 +5,39 @@ const H_100 = canvas.height;
 
 let interval;
 
-$next = document.getElementById('next');
-$reset = document.getElementById('reset');
-$start = document.getElementById('start');
-$radius = document.getElementById('radius');
-$radius_value = document.getElementById('radius-value');
+const $next = document.getElementById('next');
+const $reset = document.getElementById('reset');
+const $start = document.getElementById('start');
+const $radius = document.getElementById('radius');
+const $radius_value = document.getElementById('radius-value');
 
+function updateColorsStatisticsBoard(colors) {
+  clearAllRows();
+  colors.forEach((color) => {
+    createRow({ color });
+  });
+}
+
+function getActiveColors() {
+  return Array.from($colors.querySelectorAll('input'))
+    .filter((color) => color.checked)
+    .map((color) => color.name);
+}
+
+// Initialisation
+const defaultColors = getActiveColors();
+updateColorsStatisticsBoard(defaultColors);
+const rd = new RadiusDisplay({ radius });
+const m = new Matrix(defaultColors, 100, radius, threshold);
 $radius_value.innerText = radius;
 
-const rd = new RadiusDisplay({ radius });
-const m = new Matrix(colors, 100, radius, threshold);
+// Listeners
+$colors.onchange = function () {
+  const colors = getActiveColors();
+  updateColorsStatisticsBoard(colors);
+  m.updateColors(colors);
+  m.reset();
+};
 
 $next.onclick = function () {
   m.update();
