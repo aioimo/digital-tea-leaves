@@ -145,8 +145,6 @@ class Matrix {
   }
 
   neighbors(row_0, col_0) {
-    if (row_0 === 2 && col_0 === 2) {
-    }
     const matrix = this.state;
     const l = matrix.length;
     const radius = this.radius;
