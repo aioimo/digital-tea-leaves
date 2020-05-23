@@ -8,8 +8,13 @@ let interval;
 $next = document.getElementById('next');
 $reset = document.getElementById('reset');
 $start = document.getElementById('start');
+$radius = document.getElementById('radius');
+$radius_value = document.getElementById('radius-value');
 
-const m = new Matrix(colors, 50, RADIUS);
+$radius_value.innerText = radius;
+
+const rd = new RadiusDisplay({ radius });
+const m = new Matrix(colors, 100, radius, threshold);
 
 $next.onclick = function () {
   m.update();
@@ -19,19 +24,36 @@ $reset.onclick = function () {
   m.reset();
 };
 
+function handleStop() {
+  clearInterval(interval);
+  $start.innerText = 'START';
+  $radius.disabled = false;
+  interval = null;
+}
+
+function handleStart() {
+  $start.innerText = 'STOP';
+  $radius.disabled = true;
+}
+
 $start.onclick = function () {
   if (interval) {
-    clearInterval(interval);
-    interval = null;
+    handleStop();
   } else {
+    handleStart();
     interval = setInterval(() => {
       m.update();
       if (m.stable) {
-        clearInterval(interval);
-        interval = null;
+        handleStop();
       }
     }, 100);
   }
 };
 
-const rd = new RadiusDisplay({ radius: RADIUS });
+$radius.onchange = function (e) {
+  const radius = e.target.value;
+  $radius_value.innerText = radius;
+  rd.updateRadius(radius);
+  m.updateRadius(radius);
+  m.stable = false;
+};

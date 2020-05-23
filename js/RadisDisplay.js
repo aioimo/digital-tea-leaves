@@ -4,25 +4,34 @@ var radius_ctx = radiusDisplay.getContext('2d');
 const W_100_RADIUS = radiusDisplay.width;
 const H_100_RADIUS = radiusDisplay.height;
 
-var LENGTH = RADIUS * 2 + 1;
-var MID = (LENGTH - 1) / 2;
-
 class RadiusDisplay {
   constructor({ radius }) {
-    this.squareSize = H_100_RADIUS / LENGTH;
-    this.state = emptyMatrix(LENGTH, LENGTH);
-    this.radius = radius;
+    this.setup(radius);
+  }
+
+  updateRadius(r) {
+    this.setup(r);
+  }
+
+  setup(radius) {
+    this.radius = Number(radius);
+    this.length = this.radius * 2 + 1;
+    this.squareSize = H_100_RADIUS / this.length;
+    this.neighbouringPoints = 0;
     this.draw();
     this.activeSquares();
+    this.displayNumberContactPoints();
   }
 
   draw() {
+    const LENGTH = this.length;
+    const RADIUS = this.radius;
     radius_ctx.save();
     radius_ctx.clearRect(0, 0, W_100_RADIUS, H_100_RADIUS);
 
     for (let row = 0; row < LENGTH; row++) {
       for (let col = 0; col < LENGTH; col++) {
-        if (row === MID && col === MID) {
+        if (row === RADIUS && col === RADIUS) {
           this.drawSquare(row, col, 'lightgreen');
         } else {
           this.drawEmptySquare(row, col);
@@ -37,14 +46,16 @@ class RadiusDisplay {
     for (let row = -RADIUS; row <= RADIUS; row++) {
       for (let col = -RADIUS; col <= RADIUS; col++) {
         if (row === 0 && col === 0) continue;
-        // if (row % 2 === 1 && Math.abs(col % 2) === 1) continue;
-        // if (row % 2 === 1 && Math.abs(col % 2) === 1) continue;
-        // if (Math.abs(row) !== Math.abs(col)) continue;
-        if (!(row % 3 === 0 || col % 3 === 0)) continue;
+        if (filterRadius(row, col, RADIUS)) continue;
 
+        this.neighbouringPoints++;
         this.drawSquare(row + RADIUS, col + RADIUS, 'red');
       }
     }
+  }
+
+  displayNumberContactPoints() {
+    $points_of_contact.innerText = this.neighbouringPoints;
   }
 
   drawEmptySquare(row, col) {
