@@ -41,10 +41,12 @@ $colors.onchange = function () {
 
 $next.onclick = function () {
   m.update();
+  $colors.disabled = true;
 };
 
 $reset.onclick = function () {
   m.reset();
+  $colors.disabled = false;
 };
 
 function handleStop() {
@@ -57,6 +59,7 @@ function handleStop() {
 function handleStart() {
   $start.innerText = 'STOP';
   $radius.disabled = true;
+  $colors.disabled = true;
 }
 
 $start.onclick = function () {
