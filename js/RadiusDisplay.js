@@ -1,11 +1,11 @@
 class RadiusDisplay {
   constructor({ radius }) {
-    this.radius = radius;
+    this.radius = Number(radius);
     this.setup();
   }
 
   updateRadius(r) {
-    this.radius = r;
+    this.radius = Number(r);
     this.setup();
   }
 
@@ -53,10 +53,7 @@ class RadiusDisplay {
     $points_of_contact.innerText = this.neighbouringPoints;
     updateThresholdMaximum(this.neighbouringPoints);
 
-    console.log('Number($threshold.value)', Number($threshold.value));
-
     if (matrix.threshold > this.neighbouringPoints) {
-      console.log('this.neighboring points...:', this.neighbouringPoints);
       handleThresholdChange(this.neighbouringPoints);
     }
   }

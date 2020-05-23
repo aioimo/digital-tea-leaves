@@ -44,7 +44,6 @@ function updateRadiusValue(value) {
 }
 
 function updateThresholdDisplayValue(value) {
-  console.log('updateThresholdDisplayValue', value);
   $threshold_display_value.innerText = value;
 }
 
@@ -129,3 +128,6 @@ $radius_display_value.innerText = defaultRadius;
 // Set threshold to default
 $threshold.value = defaultThreshold;
 $threshold_display_value.innerText = defaultThreshold;
+
+// Set schema to default
+$schema.value = defaultSchemaValue;

@@ -48,10 +48,11 @@ $reset.onclick = function () {
   $colors.disabled = false;
 };
 
-schema.onchange = function (e) {
+$schema.onchange = function (e) {
   const schema = e.target.value;
   filterSchema = chooseSchema(schema);
   radiusDisplay.setup();
+  matrix.stable = false;
 };
 
 $start.onclick = function () {

@@ -84,7 +84,6 @@ class Matrix {
   }
 
   draw() {
-    console.log('this.threshold...', this.threshold);
     ctx.save();
     ctx.clearRect(0, 0, W_100, H_100);
 
