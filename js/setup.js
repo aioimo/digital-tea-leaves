@@ -24,7 +24,7 @@ const colorOptions = [
   'orange',
   'red',
 ];
-const radius = 6;
+const defaultRadius = 3;
 const threshold = 0;
 
 const S = (row, col) => row % 2 === 1 && col % 2 === 1;

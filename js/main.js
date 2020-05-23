@@ -27,9 +27,9 @@ function getActiveColors() {
 // Initialisation
 const defaultColors = getActiveColors();
 updateColorsStatisticsBoard(defaultColors);
-const rd = new RadiusDisplay({ radius });
-const m = new Matrix(defaultColors, 100, radius, threshold);
-$radius_value.innerText = radius;
+const rd = new RadiusDisplay({ radius: defaultRadius });
+const m = new Matrix(defaultColors, 100, defaultRadius, threshold);
+$radius_value.innerText = defaultRadius;
 
 // Listeners
 $colors.onchange = function () {
