@@ -1,9 +1,3 @@
-var radiusDisplay = document.getElementById('canvas-radius');
-var radius_ctx = radiusDisplay.getContext('2d');
-
-const W_100_RADIUS = radiusDisplay.width;
-const H_100_RADIUS = radiusDisplay.height;
-
 class RadiusDisplay {
   constructor({ radius }) {
     this.setup(radius);

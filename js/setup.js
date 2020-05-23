@@ -1,3 +1,26 @@
+// Select and configure main canvas
+const $canvas = document.getElementById('canvas-main');
+const ctx = $canvas.getContext('2d');
+const W_100 = $canvas.width;
+const H_100 = $canvas.height;
+
+// Select and configure secondary canvas
+var $radiusDisplay = document.getElementById('canvas-radius');
+var radius_ctx = $radiusDisplay.getContext('2d');
+const W_100_RADIUS = $radiusDisplay.width;
+const H_100_RADIUS = $radiusDisplay.height;
+
+// Select other HTML elements
+const $colors = document.getElementById('colors');
+const $next = document.getElementById('next');
+const $reset = document.getElementById('reset');
+const $start = document.getElementById('start');
+const $radius = document.getElementById('radius');
+const $radius_display_value = document.getElementById('radius-value');
+const $iterations = document.getElementById('iterations');
+const $points_of_contact = document.getElementById('points-of-contact');
+const $tableBody = document.getElementById('statistics');
+
 function colorCountId(color) {
   return `${color}-value`;
 }
@@ -10,40 +33,36 @@ function colorChangeId(color) {
   return `${color}-change`;
 }
 
-const $colors = document.getElementById('colors');
+function updateRadiusValue(value) {
+  $radius_display_value.innerText = value;
+  $radius.value = defaultRadius;
+}
 
-const colorOptions = [
-  'yellow',
-  'purple',
-  'green',
-  'blue',
-  'lightblue',
-  'magenta',
-  'black',
-  'white',
-  'orange',
-  'red',
-];
-const defaultRadius = 3;
-const threshold = 0;
+function createCheckbox({ color }) {
+  const $div = document.createElement('div');
 
-const S = (row, col) => row % 2 === 1 && col % 2 === 1;
-const INVERTED_DIAMOND = (row, col, radius) =>
-  Math.abs(col) + Math.abs(row) < radius + 1;
-const X_PATTERN = (row, col) => Math.abs(row) !== Math.abs(col);
+  const $input = document.createElement('input');
+  $input.type = 'checkbox';
+  $input.id = color;
+  $input.name = color;
+  $input.value = color;
+  $input.checked = random(['checked', null]);
 
-const INVERTED_DIAMOND_2 = (row, col, radius) =>
-  Math.abs(col) * Math.abs(row) < radius / 2;
+  const $label = document.createElement('label');
+  $label.innerText = color;
+  $label.for = color;
 
-const CRAZY = (row, col) => Math.abs(row) ** Math.abs(col) % 2 === 0;
+  $div.appendChild($input);
+  $div.appendChild($label);
 
-const WHAT_IS = (row, col) =>
-  row != -radius && (row % 2 === 1 || Math.abs(col % 2) === 1);
+  $colors.appendChild($div);
+}
 
-const GRID = () => false;
-const CIRCLE = (row, col, radius) => row ** 2 + col ** 2 > radius ** 2;
-
-const filterRadius = CRAZY;
+function createAllCheckboxes(colors) {
+  colors.forEach((color) => {
+    createCheckbox({ color });
+  });
+}
 
 function clearAllRows() {
   $tableBody.innerHTML = '';
@@ -72,31 +91,21 @@ function createRow({ color }) {
   $tableBody.appendChild($row);
 }
 
-function createCheckbox({ color }) {
-  const $div = document.createElement('div');
-
-  const $input = document.createElement('input');
-  $input.type = 'checkbox';
-  $input.id = color;
-  $input.name = color;
-  $input.value = color;
-  $input.checked = random(['checked', null]);
-
-  const $label = document.createElement('label');
-  $label.innerText = color;
-  $label.for = color;
-
-  $div.appendChild($input);
-  $div.appendChild($label);
-
-  $colors.appendChild($div);
+function updateColorsStatisticsBoard(colors) {
+  clearAllRows();
+  colors.forEach((color) => {
+    createRow({ color });
+  });
 }
 
-colorOptions.forEach((color) => {
-  createCheckbox({ color });
-});
+function getActiveColors() {
+  return Array.from($colors.querySelectorAll('input'))
+    .filter((color) => color.checked)
+    .map((color) => color.name);
+}
 
-$iterations = document.getElementById('iterations');
-$points_of_contact = document.getElementById('points-of-contact');
+// Create all checkboxes
+createAllCheckboxes(allColorOptions);
 
-$tableBody = document.getElementById('statistics');
+// Set radius to default
+$radius.value = defaultRadius;

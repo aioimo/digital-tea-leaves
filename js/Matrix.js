@@ -12,7 +12,7 @@ class Matrix {
     this.size = size;
     this.state = randomMatrix(size, size, this.colors);
     this.squareSize = H_100 / this.state.length;
-    this.radius = radius;
+    this.radius = Number(radius);
     this.threshold = threshold;
     this.stable = false;
     this.stats = {};
