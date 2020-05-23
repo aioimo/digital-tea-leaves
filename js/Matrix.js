@@ -172,27 +172,33 @@ class Matrix {
     return this.determine(this.most(this.neighbors(row, col)));
   }
 
-  nextState() {
-    const rows = this.state.length;
-    const cols = this.state[0].length;
+  updateState(state) {
+    this.state = state;
+  }
 
-    const result = emptyMatrix(rows, cols);
+  nextState() {
+    const currentState = this.state;
+
+    const rows = currentState.length;
+    const cols = currentState[0].length;
+
+    const nextState = emptyMatrix(rows, cols);
 
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         const r = this.nextValue(row, col);
         if (r) {
-          result[row][col] = r;
+          nextState[row][col] = r;
         } else {
-          result[row][col] = this.state[row][col];
+          nextState[row][col] = currentState[row][col];
         }
       }
     }
 
-    if (areMatricesEqual(this.state, result)) {
+    if (areMatricesEqual(currentState, nextState)) {
       this.stable = true;
     }
 
-    this.state = result;
+    this.updateState(nextState);
   }
 }
