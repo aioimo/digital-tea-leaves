@@ -16,10 +16,16 @@ const $next = document.getElementById('next');
 const $reset = document.getElementById('reset');
 const $start = document.getElementById('start');
 const $radius = document.getElementById('radius');
+const $threshold = document.getElementById('threshold');
+const $threshold_display_value = document.getElementById(
+  'threshold_display_value'
+);
+const $threshold_max = document.getElementById('threshold_max');
 const $radius_display_value = document.getElementById('radius-value');
 const $iterations = document.getElementById('iterations');
 const $points_of_contact = document.getElementById('points-of-contact');
 const $tableBody = document.getElementById('statistics');
+const $schema = document.getElementById('schema');
 
 function colorCountId(color) {
   return `${color}-value`;
@@ -35,7 +41,16 @@ function colorChangeId(color) {
 
 function updateRadiusValue(value) {
   $radius_display_value.innerText = value;
-  $radius.value = defaultRadius;
+}
+
+function updateThresholdDisplayValue(value) {
+  console.log('updateThresholdDisplayValue', value);
+  $threshold_display_value.innerText = value;
+}
+
+function updateThresholdMaximum(value) {
+  $threshold.max = value;
+  $threshold_max.innerText = value;
 }
 
 function createCheckbox({ color }) {
@@ -109,3 +124,8 @@ createAllCheckboxes(allColorOptions);
 
 // Set radius to default
 $radius.value = defaultRadius;
+$radius_display_value.innerText = defaultRadius;
+
+// Set threshold to default
+$threshold.value = defaultThreshold;
+$threshold_display_value.innerText = defaultThreshold;

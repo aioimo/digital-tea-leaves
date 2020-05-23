@@ -42,10 +42,32 @@
           1 <input type="range" id="radius" name="radius" min="1" max="10" /> 10
         </div>
 
+        <div>
+          <div>Threshold: <span id="threshold_display_value"></span></div>
+          0
+          <input
+            type="range"
+            id="threshold"
+            name="threshold"
+            min="0"
+            max="10"
+          />
+          <span id="threshold_max"></span>
+        </div>
+
         <canvas id="canvas-radius" width="500" height="500"></canvas>
         <br />
         <div>Points of Contacts: <span id="points-of-contact"></span></div>
         <br />
+        <div>
+          <select id="schema" name="schema">
+            <option value="circle">Circle</option>
+            <option value="diaganol">Diaganol</option>
+            <option value="grid">Grid</option>
+            <option value="inverted_diamond">Inverted Diamond</option>
+            <option value="inverted_circle">Inverted Circle</option>
+          </select>
+        </div>
         <br />
       </div>
     </div>

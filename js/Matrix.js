@@ -38,7 +38,13 @@ class Matrix {
   }
 
   updateRadius(r) {
-    this.radius = r;
+    this.radius = Number(r);
+    matrix.stable = false;
+  }
+
+  updateThreshold(val) {
+    this.threshold = Number(val);
+    matrix.stable = false;
   }
 
   updateColors(colors) {
@@ -78,6 +84,7 @@ class Matrix {
   }
 
   draw() {
+    console.log('this.threshold...', this.threshold);
     ctx.save();
     ctx.clearRect(0, 0, W_100, H_100);
 
@@ -156,7 +163,7 @@ class Matrix {
 
     for (let row = -radius; row <= radius; row++) {
       for (let col = -radius; col <= radius; col++) {
-        if (filterRadius(row, col, radius)) continue;
+        if (filterSchema(row, col, radius)) continue;
 
         const value = matrix[mod(row_0 + row, l)][mod(col_0 + col, l)];
         if (results[value]) {

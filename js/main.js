@@ -6,14 +6,15 @@ const defaultColors = getActiveColors();
 updateColorsStatisticsBoard(defaultColors);
 updateRadiusValue(defaultRadius);
 
-const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
 const matrix = new Matrix(defaultColors, 100, defaultRadius, defaultThreshold);
+const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
 
 // Handlers
 function handleStop() {
   clearInterval(interval);
   $start.innerText = 'START';
   $radius.disabled = false;
+  $threshold.disabled = false;
   interval = null;
 }
 
@@ -21,6 +22,12 @@ function handleStart() {
   $start.innerText = 'STOP';
   $radius.disabled = true;
   $colors.disabled = true;
+  $threshold.disabled = true;
+}
+
+function handleThresholdChange(value) {
+  updateThresholdDisplayValue(value);
+  matrix.updateThreshold(value);
 }
 
 // Listeners
@@ -39,6 +46,12 @@ $next.onclick = function () {
 $reset.onclick = function () {
   matrix.reset();
   $colors.disabled = false;
+};
+
+schema.onchange = function (e) {
+  const schema = e.target.value;
+  filterSchema = chooseSchema(schema);
+  radiusDisplay.setup();
 };
 
 $start.onclick = function () {
@@ -60,5 +73,9 @@ $radius.onchange = function (e) {
   updateRadiusValue(radius);
   radiusDisplay.updateRadius(radius);
   matrix.updateRadius(radius);
-  matrix.stable = false;
+};
+
+$threshold.onchange = function (e) {
+  const threshold = e.target.value;
+  handleThresholdChange(threshold);
 };

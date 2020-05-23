@@ -36,6 +36,23 @@ const WHAT_IS = (row, col) =>
 
 const GRID = () => false;
 const CIRCLE = (row, col, radius) => row ** 2 + col ** 2 > radius ** 2;
+const INVERTED_CIRCLE = (row, col, radius) => !CIRCLE(row, col, radius);
 
 // Default filter function
-const filterRadius = CRAZY;
+let filterSchema = CIRCLE;
+
+function chooseSchema(schema) {
+  switch (schema) {
+    case 'inverted_circle':
+      return INVERTED_CIRCLE;
+    case 'inverted_diamond':
+      return INVERTED_DIAMOND;
+    case 'circle':
+      return CIRCLE;
+    case 'diaganol':
+      return X_PATTERN;
+    case 'grid':
+    default:
+      return GRID;
+  }
+}

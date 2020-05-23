@@ -1,20 +1,21 @@
 class RadiusDisplay {
   constructor({ radius }) {
-    this.setup(radius);
+    this.radius = radius;
+    this.setup();
   }
 
   updateRadius(r) {
-    this.setup(r);
+    this.radius = r;
+    this.setup();
   }
 
-  setup(radius) {
-    this.radius = Number(radius);
+  setup() {
     this.length = this.radius * 2 + 1;
     this.squareSize = H_100_RADIUS / this.length;
     this.neighbouringPoints = 0;
     this.draw();
     this.activeSquares();
-    this.displayNumberContactPoints();
+    this.calculateNumberContactPoints();
   }
 
   draw() {
@@ -40,7 +41,7 @@ class RadiusDisplay {
     for (let row = -RADIUS; row <= RADIUS; row++) {
       for (let col = -RADIUS; col <= RADIUS; col++) {
         if (row === 0 && col === 0) continue;
-        if (filterRadius(row, col, RADIUS)) continue;
+        if (filterSchema(row, col, RADIUS)) continue;
 
         this.neighbouringPoints++;
         this.drawSquare(row + RADIUS, col + RADIUS, 'red');
@@ -48,8 +49,16 @@ class RadiusDisplay {
     }
   }
 
-  displayNumberContactPoints() {
+  calculateNumberContactPoints() {
     $points_of_contact.innerText = this.neighbouringPoints;
+    updateThresholdMaximum(this.neighbouringPoints);
+
+    console.log('Number($threshold.value)', Number($threshold.value));
+
+    if (matrix.threshold > this.neighbouringPoints) {
+      console.log('this.neighboring points...:', this.neighbouringPoints);
+      handleThresholdChange(this.neighbouringPoints);
+    }
   }
 
   drawEmptySquare(row, col) {
