@@ -34,6 +34,12 @@ function handleStart() {
   $threshold.disabled = true;
 }
 
+function handleRadiusChange(value) {
+  updateRadiusValue(value);
+  radiusDisplay.updateRadius(value);
+  matrix.updateRadius(value);
+}
+
 function handleThresholdChange(value) {
   updateThresholdDisplayValue(value);
   matrix.updateThreshold(value);
@@ -78,11 +84,19 @@ $start.onclick = function () {
   }
 };
 
+$radius.oninput = function (e) {
+  const radius = e.target.value;
+  handleRadiusChange(radius);
+};
+
 $radius.onchange = function (e) {
   const radius = e.target.value;
-  updateRadiusValue(radius);
-  radiusDisplay.updateRadius(radius);
-  matrix.updateRadius(radius);
+  handleRadiusChange(radius);
+};
+
+$threshold.oninput = function (e) {
+  const threshold = e.target.value;
+  handleThresholdChange(threshold);
 };
 
 $threshold.onchange = function (e) {
