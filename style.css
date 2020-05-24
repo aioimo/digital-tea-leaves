@@ -11,6 +11,29 @@ thead {
   font-weight: bold;
 }
 
+.button {
+  padding: 1rem;
+  border-radius: 8px;
+  opacity: 0.6;
+  margin: 0 0.5rem;
+  font-size: 1.2rem;
+  min-width: 93px;
+}
+
+.green {
+  background-color: green;
+  color: white;
+}
+
+.red {
+  background-color: red;
+  color: white;
+}
+
+button:hover {
+  opacity: 1;
+}
+
 td {
   padding: 5px;
 }
@@ -26,5 +49,17 @@ td {
 }
 
 .padding {
-  padding: 5px;
+  padding: 2rem;
+}
+
+.margin-bottom {
+  margin-bottom: 1.5rem;
+}
+
+.margin-top {
+  margin-top: 1.5rem;
+}
+
+.big-font {
+  font-size: 1.5rem;
 }

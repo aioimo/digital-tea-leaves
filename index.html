@@ -8,58 +8,20 @@
   </head>
   <body>
     <div class="flex">
-      <canvas id="canvas-main" width="1000" height="1000"></canvas>
-      <div class="flex-col">
-        <fieldset id="colors"></fieldset>
-        <br />
-
-        <table>
-          <thead>
-            <tr>
-              <td>Color</td>
-              <td>Count</td>
-              <td>Percentage</td>
-              <td>Change</td>
-            </tr>
-          </thead>
-          <tbody id="statistics"></tbody>
-        </table>
-        <br />
-        <div>
-          <div>Number of Iterations <span id="iterations"></span></div>
-          <div>
-            <button class="button" id="next">NEXT</button>
-            <button class="button" id="reset">RESET</button>
-            <button class="button" id="start">START</button>
-          </div>
-        </div>
-
-        <br />
-        <br />
-
-        <div>
-          <div>Radius: <span id="radius-value"></span></div>
-          1 <input type="range" id="radius" name="radius" min="1" max="10" /> 10
-        </div>
-
-        <div>
-          <div>Threshold: <span id="threshold_display_value"></span></div>
-          0
-          <input
-            type="range"
-            id="threshold"
-            name="threshold"
-            min="0"
-            max="10"
-          />
-          <span id="threshold_max"></span>
-        </div>
-
+      <div class="flex-col padding">
+        <h2>Colours</h2>
+        <fieldset id="colors" class="margin-bottom flex"></fieldset>
         <canvas id="canvas-radius" width="500" height="500"></canvas>
         <br />
         <div>Points of Contacts: <span id="points-of-contact"></span></div>
-        <br />
-        <div>
+
+        <div class="margin-bottom">
+          <h2>Radius: <span id="radius-value"></span></h2>
+          1 <input type="range" id="radius" name="radius" min="1" max="10" /> 10
+        </div>
+
+        <h2>Schema</h2>
+        <div class="margin-bottom">
           <select id="schema" name="schema">
             <option value="circle" selected>Circle</option>
             <option value="grid">Grid</option>
@@ -76,7 +38,45 @@
             <option value="weave">Weave</option>
           </select>
         </div>
-        <br />
+
+        <div class="margin-bottom margin-top">
+          <h2>Threshold: <span id="threshold_display_value"></span></h2>
+          0
+          <input
+            type="range"
+            id="threshold"
+            name="threshold"
+            min="0"
+            max="10"
+          />
+          <span id="threshold_max"></span>
+        </div>
+        <div>
+          <div>
+            <button class="button" id="next">NEXT</button>
+            <button class="button red" id="reset">RESET</button>
+            <button class="button green" id="start">START</button>
+          </div>
+        </div>
+      </div>
+      <canvas id="canvas-main" width="1000" height="1000"></canvas>
+      <div class="flex-col padding">
+        <h2>Distribution</h2>
+
+        <table class="margin-bottom">
+          <thead>
+            <tr>
+              <td>Color</td>
+              <td>Count</td>
+              <td>Percentage</td>
+              <td>Change</td>
+            </tr>
+          </thead>
+          <tbody id="statistics"></tbody>
+        </table>
+
+        <h2>Number of Iterations:</h2>
+        <div><span class="big-font" id="iterations"></span></div>
       </div>
     </div>
 

@@ -13,6 +13,8 @@ const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
 function handleStop() {
   clearInterval(interval);
   $start.innerText = 'START';
+  $start.classList.add('green');
+  $start.classList.remove('red');
   $radius.disabled = false;
   $threshold.disabled = false;
   interval = null;
@@ -20,6 +22,8 @@ function handleStop() {
 
 function handleStart() {
   $start.innerText = 'STOP';
+  $start.classList.add('red');
+  $start.classList.remove('green');
   $radius.disabled = true;
   $colors.disabled = true;
   $threshold.disabled = true;
@@ -65,7 +69,7 @@ $start.onclick = function () {
       if (matrix.stable) {
         handleStop();
       }
-    }, 100);
+    }, 75);
   }
 };
 
