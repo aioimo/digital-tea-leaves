@@ -8,21 +8,14 @@
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
   <body>
-    <div class="flex">
-      <div class="flex-col padding">
-        <h2>Colours</h2>
-        <fieldset id="colors" class="margin-bottom"></fieldset>
+    <div class="flex space-around">
+      <div class="flex-col padding left">
         <canvas id="canvas-radius" width="500" height="500"></canvas>
         <br />
         <div>Points of Contacts: <span id="points-of-contact"></span></div>
 
         <div class="margin-bottom">
-          <h2>Radius: <span id="radius-value"></span></h2>
-          1 <input type="range" id="radius" name="radius" min="1" max="10" /> 10
-        </div>
-
-        <h2>Schema</h2>
-        <div class="margin-bottom">
+          <h2>Schema</h2>
           <select id="schema" name="schema">
             <option value="grid">Grid</option>
             <option value="circle" selected>Circle</option>
@@ -39,6 +32,11 @@
           </select>
         </div>
 
+        <div class="margin-bottom">
+          <h2>Radius: <span id="radius-value"></span></h2>
+          1 <input type="range" id="radius" name="radius" min="1" max="10" /> 10
+        </div>
+
         <div class="margin-bottom margin-top">
           <h2>Threshold: <span id="threshold_display_value"></span></h2>
           0
@@ -51,16 +49,16 @@
           />
           <span id="threshold_max"></span>
         </div>
-        <div>
-          <div>
-            <button class="button" id="next">NEXT</button>
-            <button class="button red" id="reset">RESET</button>
-            <button class="button green" id="start">START</button>
-          </div>
+        <div class="flex space-between">
+          <button class="button" id="next">NEXT</button>
+          <button class="button red" id="reset">RESET</button>
+          <button class="button green" id="start">START</button>
         </div>
       </div>
       <canvas id="canvas-main" width="1000" height="1000"></canvas>
       <div class="flex-col padding">
+        <h2>Colours</h2>
+        <fieldset id="colors" class="margin-bottom"></fieldset>
         <h2>Distribution</h2>
 
         <table class="margin-bottom">
