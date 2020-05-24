@@ -32,7 +32,7 @@ const defaultSchemaValue = 'grid';
 const GRID = () => false;
 const CIRCLE = (row, col, radius) => row ** 2 + col ** 2 > radius ** 2;
 const INVERTED_CIRCLE = (row, col, radius) => !CIRCLE(row, col, radius);
-const INVERTED_DIAMOND_2 = (row, col, radius) =>
+const CROSSHAIR = (row, col, radius) =>
   Math.abs(col) * Math.abs(row) < radius / 2;
 const INVERTED_DIAMOND = (row, col, radius) =>
   Math.abs(col) + Math.abs(row) < radius + 1;
@@ -55,8 +55,8 @@ function chooseSchema(schema) {
       return INVERTED_CIRCLE;
     case 'inverted_diamond':
       return INVERTED_DIAMOND;
-    case 'inverted_diamond_2':
-      return INVERTED_DIAMOND_2;
+    case 'crosshair':
+      return CROSSHAIR;
     case 'circle':
       return CIRCLE;
     case 'diaganol':
