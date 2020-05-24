@@ -9,45 +9,48 @@
   </head>
   <body>
     <div class="flex space-around">
-      <div class="flex-col padding left">
-        <canvas id="canvas-radius" width="500" height="500"></canvas>
-        <br />
-        <div>Points of Contacts: <span id="points-of-contact"></span></div>
+      <div class="flex-col space-between padding left">
+        <div class="flex-col padding">
+          <canvas id="canvas-radius" width="500" height="500"></canvas>
+          <br />
+          <div>Points of Contacts: <span id="points-of-contact"></span></div>
 
-        <div class="margin-bottom">
-          <h2>Schema</h2>
-          <select id="schema" name="schema">
-            <option value="grid">Grid</option>
-            <option value="circle" selected>Circle</option>
-            <option value="diaganol">Diaganol</option>
-            <option value="inverted_circle">Inverted Circle</option>
-            <option value="inverted_diamond">Inverted Diamond</option>
-            <option value="asymetric">Asymetric</option>
-            <option value="crazy">Crazy</option>
-            <option value="two_quadrants">Two Quadrants</option>
-            <option value="hourglass">Hourglass</option>
-            <option value="perimeter">Perimeter</option>
-            <option value="crosshair">Crosshair</option>
-            <option value="weave">Weave</option>
-          </select>
-        </div>
+          <div class="margin-bottom">
+            <h2>Schema</h2>
+            <select id="schema" name="schema">
+              <option value="grid">Grid</option>
+              <option value="circle" selected>Circle</option>
+              <option value="diaganol">Diaganol</option>
+              <option value="inverted_circle">Inverted Circle</option>
+              <option value="inverted_diamond">Inverted Diamond</option>
+              <option value="asymetric">Asymetric</option>
+              <option value="crazy">Crazy</option>
+              <option value="two_quadrants">Two Quadrants</option>
+              <option value="hourglass">Hourglass</option>
+              <option value="perimeter">Perimeter</option>
+              <option value="crosshair">Crosshair</option>
+              <option value="weave">Weave</option>
+            </select>
+          </div>
 
-        <div class="margin-bottom">
-          <h2>Radius: <span id="radius-value"></span></h2>
-          1 <input type="range" id="radius" name="radius" min="1" max="10" /> 10
-        </div>
+          <div class="margin-bottom">
+            <h2>Radius: <span id="radius-value"></span></h2>
+            1
+            <input type="range" id="radius" name="radius" min="1" max="10" /> 10
+          </div>
 
-        <div class="margin-bottom margin-top">
-          <h2>Threshold: <span id="threshold_display_value"></span></h2>
-          0
-          <input
-            type="range"
-            id="threshold"
-            name="threshold"
-            min="0"
-            max="10"
-          />
-          <span id="threshold_max"></span>
+          <div class="margin-bottom margin-top">
+            <h2>Threshold: <span id="threshold_display_value"></span></h2>
+            0
+            <input
+              type="range"
+              id="threshold"
+              name="threshold"
+              min="0"
+              max="10"
+            />
+            <span id="threshold_max"></span>
+          </div>
         </div>
         <div class="flex space-between">
           <button class="button" id="next">NEXT</button>
