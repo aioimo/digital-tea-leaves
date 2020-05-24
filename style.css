@@ -3,6 +3,11 @@
   height: 200px;
 }
 
+#canvas-main {
+  width: 1000px;
+  height: 1000px;
+}
+
 table {
   border: 1px solid black;
 }
