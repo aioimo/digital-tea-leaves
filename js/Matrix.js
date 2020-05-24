@@ -19,6 +19,7 @@ class Matrix {
 
     this.draw();
     this.updateStatistics();
+    this.updateRegions();
   }
 
   reset() {
@@ -28,6 +29,7 @@ class Matrix {
     this.stats = {};
     this.draw();
     this.updateStatistics();
+    this.updateRegions();
   }
 
   update() {
@@ -35,6 +37,7 @@ class Matrix {
     this.nextState();
     this.draw();
     this.updateStatistics();
+    this.updateRegions();
   }
 
   updateRadius(r) {
@@ -61,6 +64,15 @@ class Matrix {
       return next > prev ? '↑' : '↓';
     }
     return '-';
+  }
+
+  updateRegions() {
+    const results = countRegions(this.state);
+
+    this.colors.forEach((color) => {
+      const $region = document.getElementById(numberRegions(color));
+      $region.innerText = results[color] || 0;
+    });
   }
 
   updateStatistics() {

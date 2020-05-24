@@ -45,3 +45,60 @@ function areMatricesEqual(matrix1, matrix2) {
 
   return true;
 }
+
+function copyMatrix(matrix) {
+  const copy = [];
+  for (let i = 0; i < matrix.length; i++) {
+    const row = [...matrix[i]];
+    copy.push(row);
+  }
+  return copy;
+}
+
+function dfs(grid, row, col, val) {
+  const length = grid.length;
+  if (
+    row < 0 ||
+    row > grid.length - 1 ||
+    col < 0 ||
+    col > grid[row].length - 1 ||
+    grid[row][col] !== val
+  ) {
+    return 0;
+  }
+
+  grid[row][col] = null;
+  dfs(grid, mod(row + 1, length), col, val);
+  dfs(grid, mod(row - 1, length), col, val);
+  dfs(grid, row, mod(col + 1, length), val);
+  dfs(grid, row, mod(col - 1, length), val);
+
+  return 1;
+}
+
+function countRegions(original) {
+  if (original == null || original.length === 0) {
+    return 0;
+  }
+
+  const grid = copyMatrix(original);
+
+  const lengthRows = grid.length;
+  const lengthCols = grid[0].length;
+
+  let regions = {};
+
+  for (let row = 0; row < lengthRows; row++) {
+    for (let col = 0; col < lengthCols; col++) {
+      const val = grid[row][col];
+      if (val) {
+        if (regions[val]) {
+          regions[val] += dfs(grid, row, col, val);
+        } else {
+          regions[val] = dfs(grid, row, col, val);
+        }
+      }
+    }
+  }
+  return regions;
+}

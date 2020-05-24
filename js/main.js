@@ -6,7 +6,12 @@ const defaultColors = getActiveColors();
 updateColorsStatisticsBoard(defaultColors);
 updateRadiusValue(defaultRadius);
 
-const matrix = new Matrix(defaultColors, 100, defaultRadius, defaultThreshold);
+const matrix = new Matrix(
+  defaultColors,
+  defaultGridSize,
+  defaultRadius,
+  defaultThreshold
+);
 const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
 
 // Handlers

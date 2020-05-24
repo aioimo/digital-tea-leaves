@@ -14,6 +14,10 @@ const allColorOptions = [
   'red',
 ];
 
+// Default grid size
+// NOTE: Do not exceed 90
+const defaultGridSize = 90;
+
 // Default radius
 const defaultRadius = 2;
 

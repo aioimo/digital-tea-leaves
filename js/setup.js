@@ -35,6 +35,10 @@ function colorPercentageId(color) {
   return `${color}-percentage`;
 }
 
+function numberRegions(color) {
+  return `${color}-regions`;
+}
+
 function colorChangeId(color) {
   return `${color}-change`;
 }
@@ -93,7 +97,10 @@ function createRow({ color }) {
   $col3.id = colorPercentageId(color);
 
   const $col4 = document.createElement('td');
-  $col4.id = colorChangeId(color);
+  $col4.id = numberRegions(color);
+
+  const $col5 = document.createElement('td');
+  $col5.id = colorChangeId(color);
 
   const $row = document.createElement('tr');
 
@@ -101,6 +108,7 @@ function createRow({ color }) {
   $row.appendChild($col2);
   $row.appendChild($col3);
   $row.appendChild($col4);
+  $row.appendChild($col5);
 
   $tableBody.appendChild($row);
 }
