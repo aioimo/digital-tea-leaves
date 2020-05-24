@@ -38,7 +38,7 @@ const INVERTED_DIAMOND = (row, col, radius) =>
   Math.abs(col) + Math.abs(row) < radius + 1;
 const X_PATTERN = (row, col) => Math.abs(row) !== Math.abs(col);
 const CRAZY = (row, col) => Math.abs(row) ** Math.abs(col) % 2 === 0;
-const S = (row, col) => row % 2 === 1 || col % 2 === 1;
+const ASYMETRIC = (row, col) => row % 2 === 1 || col % 2 === 1;
 const TWO_QUADRANTS = (row, col) => row * col > 0;
 const HOURGLASS = (row, col, radius) => Math.abs(row) < Math.abs(col);
 const WEAVE = (row, col, radius) => mod(row * col, 2) == 1;
@@ -47,8 +47,8 @@ const PERIMETER = (row, col, radius) =>
 
 function chooseSchema(schema) {
   switch (schema) {
-    case 's':
-      return S;
+    case 'asymetric':
+      return ASYMETRIC;
     case 'crazy':
       return CRAZY;
     case 'inverted_circle':
