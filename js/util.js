@@ -58,6 +58,7 @@ function copyMatrix(matrix) {
 function dfs(grid, row, col, val) {
   const length = grid.length;
   if (
+    val == null ||
     row < 0 ||
     row > grid.length - 1 ||
     col < 0 ||

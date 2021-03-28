@@ -144,10 +144,6 @@ class Matrix {
     return results;
   }
 
-  majority() {
-    return ((2 * this.radius + 1) ** 2 - 1) / 2;
-  }
-
   most(results) {
     const entries = Object.entries(results);
     let threshold = this.threshold;

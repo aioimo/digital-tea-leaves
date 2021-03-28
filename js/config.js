@@ -16,7 +16,7 @@ const allColorOptions = [
 
 // Default grid size
 // NOTE: Do not exceed 90
-const defaultGridSize = 90;
+const defaultGridSize = 80;
 
 // Default radius
 const defaultRadius = 2;
@@ -28,7 +28,6 @@ const defaultThreshold = 0;
 const defaultSchemaValue = 'grid';
 
 // Filter functions
-
 const GRID = () => false;
 const CIRCLE = (row, col, radius) => row ** 2 + col ** 2 > radius ** 2;
 const INVERTED_CIRCLE = (row, col, radius) => !CIRCLE(row, col, radius);
