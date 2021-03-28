@@ -2,21 +2,21 @@
 
 // Colors available to choose
 const allColorOptions = [
-  'yellow',
-  'purple',
-  'green',
-  'blue',
-  'lightblue',
-  'magenta',
-  'black',
-  'white',
-  'orange',
-  'red',
+  { title: 'yellow', color: 'yellow' },
+  { title: 'purple', color: 'purple' },
+  { title: 'green', color: 'green' },
+  { title: 'blue', color: 'blue' },
+  { title: 'lightblue', color: 'lightblue' },
+  { title: 'magenta', color: 'magenta' },
+  { title: 'black', color: 'black' },
+  { title: 'white', color: 'white' },
+  { title: 'orange', color: 'orange' },
+  { title: 'red', color: 'red' },
 ];
 
 // Default grid size
 // NOTE: Do not exceed 90
-const defaultGridSize = 80;
+const defaultGridSize = 160;
 
 // Default radius
 const defaultRadius = 2;

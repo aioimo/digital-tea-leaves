@@ -7,9 +7,6 @@ class Matrix {
     radius = 2,
     threshold = 0
   ) {
-    if (size > 90) {
-      throw Error('Size must be 90 cells or fewer');
-    }
     this.numberIterations = 0;
     this.colors = colors;
     this.size = size;
@@ -70,6 +67,10 @@ class Matrix {
   }
 
   updateRegions() {
+    if (this.size > 89) {
+      return;
+    }
+
     const results = countRegions(this.state);
 
     this.colors.forEach((color) => {

@@ -56,14 +56,14 @@ function updateThresholdMaximum(value) {
   $threshold_max.innerText = value;
 }
 
-function createCheckbox({ color }) {
+function createCheckbox({ title, color }) {
   const $div = document.createElement('div');
 
   const $input = document.createElement('input');
   $input.type = 'checkbox';
-  $input.id = color;
-  $input.name = color;
-  $input.value = color;
+  $input.id = title;
+  $input.name = title;
+  $input.value = title;
   $input.checked = random(['checked', null]);
 
   const $label = document.createElement('label');
@@ -78,7 +78,7 @@ function createCheckbox({ color }) {
 
 function createAllCheckboxes(colors) {
   colors.forEach((color) => {
-    createCheckbox({ color });
+    createCheckbox(color);
   });
 }
 
