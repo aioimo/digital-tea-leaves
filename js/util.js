@@ -6,6 +6,11 @@ function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function pickN(arr, n) {
+  const shuffled = Array.from(arr).sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, n);
+}
+
 function emptyMatrix(rows, cols) {
   let empty = [];
   for (let row = 0; row < rows; row++) {
