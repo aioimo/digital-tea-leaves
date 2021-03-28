@@ -14,6 +14,8 @@ const allColorOptions = [
   { title: 'red', color: 'red' },
 ];
 
+const allColors = allColorOptions.map((c) => c.color);
+
 // Default grid size
 // NOTE: Do not exceed 90
 const defaultGridSize = 160;

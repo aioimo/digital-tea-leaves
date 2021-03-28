@@ -35,14 +35,23 @@ function handleStart() {
 }
 
 function handleRadiusChange(value) {
+  $radius.value = value;
   updateRadiusValue(value);
   radiusDisplay.updateRadius(value);
   matrix.updateRadius(value);
 }
 
 function handleThresholdChange(value) {
+  $threshold.value = value;
   updateThresholdDisplayValue(value);
   matrix.updateThreshold(value);
+}
+
+function handleSchemaChange(value) {
+  $schema.value = value;
+  filterSchema = chooseSchema(value);
+  radiusDisplay.setup();
+  matrix.stable = false;
 }
 
 // Listeners
@@ -65,9 +74,7 @@ $reset.onclick = function () {
 
 $schema.onchange = function (e) {
   const schema = e.target.value;
-  filterSchema = chooseSchema(schema);
-  radiusDisplay.setup();
-  matrix.stable = false;
+  handleSchemaChange(schema);
 };
 
 $start.onclick = function () {
@@ -102,4 +109,26 @@ $threshold.oninput = function (e) {
 $threshold.onchange = function (e) {
   const threshold = e.target.value;
   handleThresholdChange(threshold);
+};
+
+$favorites.onchange = function (e) {
+  const selected = e.target.value;
+
+  if (!selected) {
+    return;
+  }
+
+  const { colors: n, schema, threshold, radius } = favorites.find(
+    (s) => s.id === selected
+  );
+
+  const newColors = pickN(allColors, n);
+
+  setColours(newColors);
+  updateColorsStatisticsBoard(newColors);
+  handleThresholdChange(threshold);
+  handleRadiusChange(radius);
+  handleSchemaChange(schema);
+  matrix.updateColors(newColors);
+  matrix.reset();
 };

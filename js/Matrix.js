@@ -1,12 +1,7 @@
-const BORDER_WIDTH = 1;
+const BORDER_WIDTH = 0;
 
 class Matrix {
-  constructor(
-    colors = ['black', 'white'],
-    size = 50,
-    radius = 2,
-    threshold = 0
-  ) {
+  constructor(colors, size = 50, radius = 2, threshold = 0) {
     this.numberIterations = 0;
     this.colors = colors;
     this.size = size;

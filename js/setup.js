@@ -20,6 +20,7 @@ const $threshold = document.getElementById('threshold');
 const $threshold_display_value = document.getElementById(
   'threshold_display_value'
 );
+const $favorites = document.getElementById('favorites');
 const $threshold_max = document.getElementById('threshold_max');
 const $radius_display_value = document.getElementById('radius-value');
 const $iterations = document.getElementById('iterations');
@@ -117,6 +118,20 @@ function updateColorsStatisticsBoard(colors) {
   clearAllRows();
   colors.forEach((color) => {
     createRow({ color });
+  });
+}
+
+function resetColours() {
+  Array.from($colors.querySelectorAll('input')).forEach(($input) => {
+    $input.checked = false;
+  });
+}
+
+function setColours(colors) {
+  resetColours();
+  colors.forEach((color) => {
+    $input = document.getElementById(color);
+    $input.checked = true;
   });
 }
 
