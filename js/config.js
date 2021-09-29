@@ -1,4 +1,5 @@
 // Defaults
+const EDIT_MODE = false;
 
 // Colors available to choose
 const allColorOptions = [
@@ -18,7 +19,7 @@ const allColors = allColorOptions.map((c) => c.color);
 
 // Default grid size
 // NOTE: Do not exceed 90
-const defaultGridSize = 160;
+const defaultGridSize = 100;
 
 // Default radius
 const defaultRadius = 2;

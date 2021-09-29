@@ -158,7 +158,7 @@ class Matrix {
   }
 
   determine(winners) {
-    return winners.length === 1 ? winners[0] : undefined;
+    return winners.length === 1 ? winners[0] : null;
   }
 
   neighbors(row_0, col_0) {

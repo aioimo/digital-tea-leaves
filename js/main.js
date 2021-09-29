@@ -6,6 +6,12 @@ const defaultColors = getActiveColors();
 updateColorsStatisticsBoard(defaultColors);
 updateRadiusValue(defaultRadius);
 
+// window.onload = () => {
+//   if (EDIT_MODE) {
+//      make everything visible again
+//   }
+// };
+
 const matrix = new Matrix(
   defaultColors,
   defaultGridSize,
@@ -16,6 +22,7 @@ const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
 
 // Handlers
 function handleStop() {
+  $reset.classList.remove('hidden');
   clearInterval(interval);
   $start.innerText = 'START';
   $start.classList.add('green');
@@ -70,6 +77,8 @@ $next.onclick = function () {
 $reset.onclick = function () {
   matrix.reset();
   $colors.disabled = false;
+  $reset.classList.add('hidden');
+  $start.classList.remove('hidden');
 };
 
 $schema.onchange = function (e) {
@@ -78,6 +87,8 @@ $schema.onchange = function (e) {
 };
 
 $start.onclick = function () {
+  $start.classList.add('hidden');
+
   if (interval) {
     handleStop();
   } else {
@@ -118,9 +129,12 @@ $favorites.onchange = function (e) {
     return;
   }
 
-  const { colors: n, schema, threshold, radius } = favorites.find(
-    (s) => s.id === selected
-  );
+  const {
+    colors: n,
+    schema,
+    threshold,
+    radius,
+  } = favorites.find((s) => s.id === selected);
 
   const newColors = pickN(allColors, n);
 

@@ -9,14 +9,18 @@
   </head>
   <body>
     <div class="flex space-around">
-      <div class="flex-col space-between padding left">
+      <div class="hidden flex-col space-between padding left">
         <div class="flex-col padding">
           <h1>Colourful Cells</h1>
-          <canvas id="canvas-radius" width="500" height="500"></canvas>
+          <section>
+            <canvas id="canvas-radius" width="500" height="500"></canvas>
+          </section>
           <br />
-          <div>Points of Contacts: <span id="points-of-contact"></span></div>
+          <div class="hidden">
+            Points of Contacts: <span id="points-of-contact"></span>
+          </div>
 
-          <div class="margin-bottom">
+          <div class="hidden margin-bottom">
             <h2>Schema</h2>
             <select id="schema" name="schema">
               <option value="grid">Grid</option>
@@ -34,13 +38,13 @@
             </select>
           </div>
 
-          <div class="margin-bottom">
+          <div class="hidden margin-bottom">
             <h2>Radius: <span id="radius-value"></span></h2>
             1
             <input type="range" id="radius" name="radius" min="1" max="10" /> 10
           </div>
 
-          <div class="margin-bottom margin-top">
+          <div class="hidden margin-bottom margin-top">
             <h2>Threshold: <span id="threshold_display_value"></span></h2>
             0
             <input
@@ -53,24 +57,28 @@
             <span id="threshold_max"></span>
           </div>
         </div>
-        <div class="margin-bottom margin-top">
+        <div class="hidden margin-bottom margin-top">
           <label for="favorites">Favorites</label>
           <select id="favorites" name="favorites">
             <option value="">-</option>
             <option value="test_1">Grid - T12 - R2</option>
-            <option value="test_2">Test 2</option>
+            <option value="test_2">Diaganol - T8 - R4</option>
           </select>
         </div>
-        <div class="flex space-between">
-          <button class="button" id="next">NEXT</button>
-          <button class="button red" id="reset">RESET</button>
-          <button class="button green" id="start">START</button>
-        </div>
       </div>
-      <canvas id="canvas-main" width="1000" height="1000"></canvas>
+      <section id="canvas-section">
+        <canvas id="canvas-main" width="1000" height="1000"></canvas>
+        <div class="flex justify-center">
+          <button class="button hidden" id="next">NEXT</button>
+          <button class="button hidden reset red" id="reset">RESET</button>
+          <button class="button green start" id="start">START</button>
+        </div>
+      </section>
       <div class="flex-col padding">
-        <h2>Colours</h2>
-        <fieldset id="colors" class="margin-bottom"></fieldset>
+        <section id="hidden colors-section">
+          <h2>Colours</h2>
+          <fieldset id="colors" class="hidden margin-bottom"></fieldset>
+        </section>
         <h2>Distribution</h2>
 
         <table class="margin-bottom">
@@ -86,8 +94,10 @@
           <tbody id="statistics"></tbody>
         </table>
 
-        <h2>Number of Iterations:</h2>
-        <div><span class="big-font" id="iterations"></span></div>
+        <section id="iterations-section">
+          <h2 class="white hidden">Number of Iterations:</h2>
+          <div><span class="white big-font" id="iterations"></span></div>
+        </section>
       </div>
     </div>
 
