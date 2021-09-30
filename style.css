@@ -4,6 +4,7 @@
 
 body {
   font-family: 'Courier New', Courier, monospace;
+  height: 100%;
 }
 
 #button-menu {
@@ -98,6 +99,10 @@ td {
 
 .space-between {
   justify-content: space-between;
+}
+
+.center {
+  justify-content: center;
 }
 
 .flex-col {
