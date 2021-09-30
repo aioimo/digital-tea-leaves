@@ -24,17 +24,17 @@ const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
 function handleStop() {
   $reset.classList.remove('hidden');
   clearInterval(interval);
-  $start.innerText = 'START';
+  // $start.innerText = 'START';
   $start.classList.add('green');
-  $start.classList.remove('red');
+  // $start.classList.remove('red');
   $radius.disabled = false;
   $threshold.disabled = false;
   interval = null;
 }
 
 function handleStart() {
-  $start.innerText = 'STOP';
-  $start.classList.add('red');
+  // $start.innerText = 'STOP';
+  // $start.classList.add('red');
   $start.classList.remove('green');
   $radius.disabled = true;
   $colors.disabled = true;
