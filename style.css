@@ -7,8 +7,8 @@ body {
 }
 
 #button-menu {
-  width: 100px;
-  height: 100px;
+  width: 81px;
+  height: 81px;
 }
 
 #canvas-radius {
@@ -60,20 +60,11 @@ thead {
   cursor: pointer;
   padding: 0.8rem;
   border-radius: 5px;
-  font-size: 3rem;
-  min-width: 80px;
-  min-height: 80px;
-  transition: all 0.2s ease-in-out;
+  font-size: 2.8rem;
+  width: 80px;
+  height: 80px;
+  transition: all 0.3s ease-in-out;
 }
-
-/* .start {
-  background-color: black;
-  /* box-shadow: 2px 2px grey; */
-*/
-
-/* .reset {
-  box-shadow: 2px 2px red;
-} */
 
 .white {
   color: white;
@@ -81,11 +72,11 @@ thead {
 
 .button:active {
   box-shadow: none;
-  transform: translate(4px, 4px);
 }
 
 .button:hover {
-  opacity: 1;
+  color: lightblue;
+  border: 1px solid lightblue;
 }
 
 td {
