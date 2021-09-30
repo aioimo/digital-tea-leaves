@@ -3,52 +3,79 @@
 } */
 
 body {
-  font-family: 'Courier New', Courier, monospace;
-  height: 100%;
-}
-
-#button-menu {
-  width: 81px;
-  height: 81px;
-}
-
-#canvas-radius {
-  width: 200px;
-  height: 200px;
-}
-
-#canvas-main {
-  width: 1000px;
-  height: 1000px;
-}
-
-#iterations {
-  color: white;
-  font-size: 76px;
-}
-
-.iterations-section {
-  font-weight: 0;
-  font-size: 20px;
-}
-
-#distribution-section tbody {
-  color: white;
-}
-
-body {
   background-color: black;
-}
-
-table {
-  border: 1px solid black;
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  /* height: 100%; */
 }
 
 thead {
   font-weight: bold;
 }
 
+td {
+  padding: 5px;
+}
+
+#wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* canvas panel */
+/*              */
+#canvas-section {
+  width: 350px;
+  height: 350px;
+}
+
+#canvas-main {
+  width: 350px;
+  height: 350px;
+  border-radius: 0 0 5px 5px;
+}
+
+/* display panel */
+/*               */
+#display-panel-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  width: 100%;
+}
+
+/* color percentage results */
+/*                          */
+#distribution-section {
+  width: 33%;
+}
+
+#distribution-section table {
+  border: 1px solid black;
+}
+
+#distribution-section tbody {
+  color: white;
+}
+
+.small-square {
+  border: 1px solid white;
+  border-radius: 5px;
+  width: 25px;
+  height: 25px;
+}
+
+/* button menu */
+/*             */
+#button-menu {
+  display: flex;
+  justify-content: center;
+  width: 33%;
+}
+
 .button-bar {
+  width: 33%;
   display: flex;
   flex-direction: column;
   flex-direction: row-reverse;
@@ -59,20 +86,9 @@ thead {
   border: none;
   color: white;
   cursor: pointer;
-  padding: 0.8rem;
-  border-radius: 5px;
-  font-size: 2.8rem;
-  width: 80px;
-  height: 80px;
+  /* padding: 0.8rem; */
+  font-size: 3.2rem;
   transition: all 0.3s ease-in-out;
-}
-
-.white {
-  color: white;
-}
-
-.button:active {
-  box-shadow: none;
 }
 
 .button:hover {
@@ -80,12 +96,36 @@ thead {
   border: 1px solid lightblue;
 }
 
-td {
-  padding: 5px;
+#iterations-section {
+  width: 33%;
+  text-align: right;
 }
 
-.left {
-  width: 300px;
+#iterations {
+  color: white;
+  font-size: 56px;
+}
+/*                   */
+/* display panel end */
+
+/* hidden control panel */
+/*                      */
+#canvas-radius {
+  width: 200px;
+  height: 200px;
+}
+
+#colors-section {
+  width: 33%;
+}
+/*                          */
+/* hidden control panel end */
+
+/* Foundations */
+/*             */
+
+.white {
+  color: white;
 }
 
 .flex {
@@ -110,10 +150,6 @@ td {
   flex-direction: column;
 }
 
-.padding {
-  padding: 1rem;
-}
-
 .margin-bottom {
   margin-bottom: 1.5rem;
 }
@@ -130,9 +166,9 @@ td {
   display: none;
 }
 
-.small-square {
-  border: 1px solid white;
-  border-radius: 5px;
-  width: 25px;
-  height: 25px;
-}
+/* @media only screen and (min-width: 200px) {
+  body {
+    background-color: aqua;
+    width: 300px;
+  }
+} */
