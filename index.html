@@ -8,9 +8,9 @@
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
   <body>
-    <div class="flex center">
-      <div class="hidden flex-col space-between padding left">
-        <div class="flex-col padding">
+    <div id="wrapper">
+      <section class="hidden flex-col space-between">
+        <div class="flex-col">
           <h1>Digital Tea Leaves</h1>
           <section>
             <canvas id="canvas-radius" width="500" height="500"></canvas>
@@ -44,7 +44,7 @@
             <input type="range" id="radius" name="radius" min="1" max="10" /> 10
           </div>
 
-          <div class="hidden margin-bottom margin-top">
+          <div class="hidden margin-bottom">
             <h2>Threshold: <span id="threshold_display_value"></span></h2>
             0
             <input
@@ -57,7 +57,7 @@
             <span id="threshold_max"></span>
           </div>
         </div>
-        <div class="hidden margin-bottom margin-top">
+        <div class="hidden margin-bottom">
           <label for="favorites">Favorites</label>
           <select id="favorites" name="favorites">
             <option value="">-</option>
@@ -65,20 +65,20 @@
             <option value="test_2">Diaganol - T8 - R4</option>
           </select>
         </div>
-      </div>
-      <section id="canvas-section">
+      </section>
+      <section id="canvas-section ">
         <canvas id="canvas-main" width="1000" height="1000"></canvas>
       </section>
-      <div class="flex-col space-between padding">
-        <section id="hidden colors-section">
+      <section id="display-panel-section">
+        <section id="colors-section" class="hidden">
           <h2>Colours</h2>
           <fieldset id="colors" class="hidden margin-bottom"></fieldset>
         </section>
         <section id="distribution-section">
-          <h2>Distribution</h2>
+          <h2 class="hidden">Distribution</h2>
 
           <table class="margin-bottom">
-            <thead>
+            <!-- <thead>
               <tr>
                 <td>Color</td>
                 <td class="hidden">Count</td>
@@ -86,9 +86,15 @@
                 <td class="hidden">Regions</td>
                 <td class="hidden">Change</td>
               </tr>
-            </thead>
+            </thead> -->
             <tbody id="statistics"></tbody>
           </table>
+        </section>
+
+        <section id="button-menu">
+          <button class="button hidden" id="next">NEXT</button>
+          <button class="button hidden reset" id="reset">&#9783;</button>
+          <button class="button start-button" id="start">&#9658;</button>
         </section>
 
         <section id="iterations-section">
@@ -97,12 +103,7 @@
             <span class="white big-font" id="iterations"></span>
           </div>
         </section>
-        <section id="button-menu">
-          <button class="button hidden" id="next">NEXT</button>
-          <button class="button hidden reset" id="reset">&#9783;</button>
-          <button class="button start" id="start">&#9658;</button>
-        </section>
-      </div>
+      </section>
     </div>
 
     <script src="./js/util.js"></script>
