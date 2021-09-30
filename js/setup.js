@@ -65,7 +65,7 @@ function createCheckbox({ title, color }) {
   $input.id = title;
   $input.name = title;
   $input.value = title;
-  $input.checked = random(['checked', null]);
+  $input.checked = EDIT_MODE ? random(['checked', null]) : 'checked';
 
   const $label = document.createElement('label');
   $label.innerText = color;
@@ -88,19 +88,34 @@ function clearAllRows() {
 }
 
 function createRow({ color }) {
+  // td "Color"
   const $col1 = document.createElement('td');
-  $col1.innerText = color;
 
+  const $coloredSquare1 = document.createElement('div');
+  $coloredSquare1.classList.add('small-square');
+  // $coloredSquare1.innerText = color;
+  $coloredSquare1.style.color = color;
+  $coloredSquare1.style.backgroundColor = color;
+
+  $col1.appendChild($coloredSquare1);
+
+  // td "Count"
   const $col2 = document.createElement('td');
+  $col2.classList.add('hidden');
   $col2.id = colorCountId(color);
 
+  // td "Percentage"
   const $col3 = document.createElement('td');
   $col3.id = colorPercentageId(color);
 
+  // td "Number of regions"
   const $col4 = document.createElement('td');
+  $col4.classList.add('hidden');
   $col4.id = numberRegions(color);
 
+  // td "Delta"
   const $col5 = document.createElement('td');
+  $col5.classList.add('hidden');
   $col5.id = colorChangeId(color);
 
   const $row = document.createElement('tr');
@@ -142,7 +157,7 @@ function getActiveColors() {
 }
 
 // Create all checkboxes
-createAllCheckboxes(allColorOptions);
+createAllCheckboxes(colorSchema);
 
 // Set radius to default
 $radius.value = defaultRadius;

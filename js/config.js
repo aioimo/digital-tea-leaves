@@ -16,10 +16,17 @@ const allColorOptions = [
 ];
 
 const allColors = allColorOptions.map((c) => c.color);
+const colorSchema = [
+  { title: 'white', color: 'white' },
+  ...pickN(
+    allColorOptions.filter((c) => c.color !== 'white'),
+    2
+  ),
+];
 
 // Default grid size
 // NOTE: Do not exceed 90
-const defaultGridSize = 100;
+const defaultGridSize = 125;
 
 // Default radius
 const defaultRadius = 2;

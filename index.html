@@ -68,35 +68,37 @@
       </div>
       <section id="canvas-section">
         <canvas id="canvas-main" width="1000" height="1000"></canvas>
-        <div class="flex justify-center">
-          <button class="button hidden" id="next">NEXT</button>
-          <button class="button hidden reset red" id="reset">RESET</button>
-          <button class="button green start" id="start">START</button>
-        </div>
       </section>
-      <div class="flex-col padding">
+      <div class="flex-col space-between padding">
         <section id="hidden colors-section">
           <h2>Colours</h2>
           <fieldset id="colors" class="hidden margin-bottom"></fieldset>
         </section>
-        <h2>Distribution</h2>
+        <section id="distribution-section">
+          <h2>Distribution</h2>
 
-        <table class="margin-bottom">
-          <thead>
-            <tr>
-              <td>Color</td>
-              <td>Count</td>
-              <td>Percentage</td>
-              <td>Regions</td>
-              <td>Change</td>
-            </tr>
-          </thead>
-          <tbody id="statistics"></tbody>
-        </table>
+          <table class="margin-bottom">
+            <thead>
+              <tr>
+                <td>Color</td>
+                <td class="hidden">Count</td>
+                <td>Percentage</td>
+                <td>Regions</td>
+                <td>Change</td>
+              </tr>
+            </thead>
+            <tbody id="statistics"></tbody>
+          </table>
+        </section>
 
         <section id="iterations-section">
           <h2 class="white hidden">Number of Iterations:</h2>
           <div><span class="white big-font" id="iterations"></span></div>
+        </section>
+        <section id="button-menu">
+          <button class="button hidden" id="next">NEXT</button>
+          <button class="button hidden reset red" id="reset">RESET</button>
+          <button class="button green start" id="start">START</button>
         </section>
       </div>
     </div>

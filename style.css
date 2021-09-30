@@ -1,5 +1,14 @@
+/* * {
+  border: 1px solid white;
+} */
+
 body {
   font-family: 'Courier New', Courier, monospace;
+}
+
+#button-menu {
+  width: 100px;
+  height: 100px;
 }
 
 #canvas-radius {
@@ -10,7 +19,6 @@ body {
 #canvas-main {
   width: 1000px;
   height: 1000px;
-  z-index: 10;
 }
 
 #iterations {
@@ -20,6 +28,10 @@ body {
 .iterations-section {
   font-weight: 0;
   font-size: 20px;
+}
+
+#distribution-section tbody {
+  color: white;
 }
 
 body {
@@ -118,4 +130,10 @@ td {
 
 .hidden {
   display: none;
+}
+
+.small-square {
+  border-radius: 5px;
+  width: 25px;
+  height: 25px;
 }
