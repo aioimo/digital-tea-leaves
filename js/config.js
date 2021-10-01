@@ -1,47 +1,24 @@
 // Defaults
 const EDIT_MODE = false;
 
-// Colors available to choose
-const allColorOptions = [
-  { title: 'yellow', color: 'yellow' },
-  { title: 'purple', color: 'purple' },
-  { title: 'green', color: 'green' },
-  { title: 'blue', color: 'blue' },
-  { title: 'lightblue', color: 'lightblue' },
-  { title: 'magenta', color: 'magenta' },
-  { title: 'black', color: 'black' },
-  { title: 'white', color: 'white' },
-  { title: 'orange', color: 'orange' },
-  { title: 'red', color: 'red' },
-];
-
-const allColors = allColorOptions.map((c) => c.color);
-const twoColorsPlusWhite = [
-  { title: 'white', color: 'white' },
-  ...pickN(
-    allColorOptions.filter((c) => c.color !== 'white'),
-    2
-  ),
-];
-
-const colorSchema = [
-  { title: 'white', color: 'white' },
-  { title: 'black', color: 'black' },
-  { title: 'magenta', color: 'magenta' },
-];
+const ACTIVE_SCHEMA = THREE_COLOR_SIMPLE;
+console.log('Hello! I hope you enjoy my creation.');
 
 // Default grid size
 // NOTE: Do not exceed 90
-const defaultGridSize = 125;
+const defaultGridSize = ACTIVE_SCHEMA.gridSize;
 
 // Default radius
-const defaultRadius = 2;
+const defaultRadius = ACTIVE_SCHEMA.radius;
 
 // Default threshold
-const defaultThreshold = 0;
+const defaultThreshold = ACTIVE_SCHEMA.threshold;
 
 // Default schema value
-const defaultSchemaValue = 'grid';
+const defaultSchemaValue = ACTIVE_SCHEMA.schema;
+
+// Colors
+const colorSchema = getGoodColorScheme(ACTIVE_SCHEMA.colors);
 
 // Filter functions
 const GRID = () => false;

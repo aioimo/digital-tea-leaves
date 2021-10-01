@@ -1,6 +1,6 @@
 const favorites = [
   {
-    id: 'duel_t12_r2_c6',
+    id: 'grid_t12_r2_c6',
     name: 'Duel',
     radius: 2,
     threshold: 0,
@@ -24,3 +24,12 @@ const favorites = [
     colors: 5,
   },
 ];
+
+const THREE_COLOR_SIMPLE = {
+  id: 'grid_t2_r4_c3',
+  schema: 'grid',
+  gridSize: 125,
+  radius: 2,
+  threshold: 2,
+  colors: 3,
+};
