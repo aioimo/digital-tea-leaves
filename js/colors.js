@@ -24,17 +24,17 @@ const twoColorsPlusWhite = [
 const goodColorSchemes = {
   2: [
     [
-      { title: 'white', color: 'white' },
-      { title: 'black', color: 'black' },
+      { title: '#2A1A1F', color: '#2A1A1F' }, // Black Coffee
+      { title: '#FFDA22', color: '#FFDA22' }, // Sizzling Sunrise
     ],
     [
-      { title: 'magenta', color: 'magenta' },
-      { title: 'black', color: 'black' },
+      { title: '#B10F2E', color: '#B10F2E' }, // Upsdell Red
+      { title: '#E5E7E6', color: '#E5E7E6' }, // Platinum
     ],
-    [
-      { title: 'orange', color: 'orange' },
-      { title: 'white', color: 'white' },
-    ],
+    // [
+    //   { title: 'orange', color: 'orange' },
+    //   { title: 'white', color: 'white' },
+    // ],
   ],
   3: [
     // [
@@ -52,6 +52,11 @@ const goodColorSchemes = {
       { title: '#6A4C93', color: '#6A4C93' }, // Royal Purple
       { title: '#241715', color: '#241715' }, // Smoky Black
       // { title: '#14591D', color: '#14591D' }, // Lincoln Green
+    ],
+    [
+      { title: '#2A1A1F', color: '#2A1A1F' }, // Black Coffee
+      { title: '#FFDA22', color: '#FFDA22' }, // Sizzling Sunrise
+      { title: '#F5F9E9', color: '#F5F9E9' }, // Ivory
     ],
   ],
 };

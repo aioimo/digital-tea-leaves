@@ -33,3 +33,12 @@ const THREE_COLOR_SIMPLE = {
   threshold: 2,
   colors: 3,
 };
+
+const DUEL = {
+  id: 'grid_t0_r2_c2',
+  schema: 'grid',
+  gridSize: 125,
+  radius: 2,
+  threshold: 0,
+  colors: 2,
+};

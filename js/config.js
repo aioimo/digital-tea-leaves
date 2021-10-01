@@ -1,7 +1,7 @@
 // Defaults
 const EDIT_MODE = false;
 
-const ACTIVE_SCHEMA = THREE_COLOR_SIMPLE;
+const ACTIVE_SCHEMA = pickN([THREE_COLOR_SIMPLE], 2)[0];
 console.log('Hello! I hope you enjoy my creation.');
 
 // Default grid size
