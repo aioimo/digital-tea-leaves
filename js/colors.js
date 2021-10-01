@@ -39,10 +39,6 @@ const goodColorSchemes = {
       { title: '#2d9d92', color: '#2d9d92' },
       { title: 'white', color: 'white' },
     ],
-    [
-      { title: 'orange', color: 'orange' },
-      { title: 'white', color: 'white' },
-    ],
   ],
   3: [
     [

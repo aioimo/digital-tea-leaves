@@ -48,6 +48,7 @@ function handleStop(matrix) {
   $threshold.disabled = false;
   interval = null;
   onAfterEffect(matrix);
+  handleData(matrix);
 }
 
 function handleStart() {
