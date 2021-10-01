@@ -42,3 +42,12 @@ const DUEL = {
   threshold: 0,
   colors: 2,
 };
+
+const DIAGANOL_THREE = {
+  id: 'diaganol_t4_r4_c5',
+  schema: 'diaganol',
+  gridSize: 125,
+  radius: 4,
+  threshold: 8,
+  colors: 5,
+};

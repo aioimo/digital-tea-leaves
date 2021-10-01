@@ -72,9 +72,31 @@ const goodColorSchemes = {
       { title: 'white', color: 'white' },
     ],
   ],
+  4: [
+    [
+      { title: '#2d9d92', color: '#2d9d92' },
+      { title: 'black', color: 'black' },
+      { title: 'white', color: 'white' },
+      { title: 'orange', color: 'orange' },
+    ],
+  ],
+  5: [
+    [
+      { title: 'purple', color: 'purple' },
+      { title: 'magenta', color: 'magenta' },
+      { title: 'white', color: 'white' },
+      { title: 'yellow', color: 'yellow' },
+      { title: 'black', color: 'black' },
+    ],
+  ],
 };
 
 function getGoodColorScheme(n) {
   const correctSizeSchemas = goodColorSchemes[String(n)];
+
+  if (!correctSizeSchemas) {
+    return pickN(allColorOptions, n);
+  }
+
   return pickN(correctSizeSchemas, 1)[0];
 }
