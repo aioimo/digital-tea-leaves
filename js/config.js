@@ -16,12 +16,18 @@ const allColorOptions = [
 ];
 
 const allColors = allColorOptions.map((c) => c.color);
-const colorSchema = [
+const twoColorsPlusWhite = [
   { title: 'white', color: 'white' },
   ...pickN(
     allColorOptions.filter((c) => c.color !== 'white'),
     2
   ),
+];
+
+const colorSchema = [
+  { title: 'white', color: 'white' },
+  { title: 'black', color: 'black' },
+  { title: 'magenta', color: 'magenta' },
 ];
 
 // Default grid size
