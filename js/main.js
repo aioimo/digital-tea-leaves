@@ -20,8 +20,25 @@ const matrix = new Matrix(
 );
 const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
 
+// Special Effects
+function handle69(n) {
+  if (n === 69) {
+    $hiddenSurprise.classList.remove('hidden');
+    $hiddenSurprise.innerText = ';)';
+  }
+}
+
+function clearAfterEffects() {
+  $hiddenSurprise.classList.add('hidden');
+  $hiddenSurprise.innerText = '';
+}
+
+function onAfterEffect(matrix) {
+  handle69(matrix.numberIterations);
+}
+
 // Handlers
-function handleStop() {
+function handleStop(matrix) {
   $reset.classList.remove('hidden');
   clearInterval(interval);
   // $start.innerText = 'START';
@@ -30,6 +47,7 @@ function handleStop() {
   $radius.disabled = false;
   $threshold.disabled = false;
   interval = null;
+  onAfterEffect(matrix);
 }
 
 function handleStart() {
@@ -79,6 +97,7 @@ $reset.onclick = function () {
   $colors.disabled = false;
   $reset.classList.add('hidden');
   $start.classList.remove('hidden');
+  clearAfterEffects();
 };
 
 $schema.onchange = function (e) {
@@ -96,7 +115,7 @@ $start.onclick = function () {
     interval = setInterval(() => {
       matrix.update();
       if (matrix.stable) {
-        handleStop();
+        handleStop(matrix);
       }
     }, 75);
   }

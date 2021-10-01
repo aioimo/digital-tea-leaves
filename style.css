@@ -99,11 +99,14 @@ td {
 #iterations-section {
   width: 33%;
   text-align: right;
+  position: relative;
 }
-
 #iterations {
   color: white;
   font-size: 56px;
+}
+#hidden-surprise {
+  padding-right: 1rem;
 }
 /*                   */
 /* display panel end */
@@ -187,6 +190,15 @@ td {
     max-width: 150px;
     padding: 0.5rem;
   }
+
+  #hidden-surprise {
+    position: absolute;
+    /* padding-left: 1rem; */
+    padding-right: 0rem;
+    top: 50%;
+    right: -40px;
+  }
+
   #button-menu {
     width: auto;
     text-align: left;

@@ -27,6 +27,7 @@ const $iterations = document.getElementById('iterations');
 const $points_of_contact = document.getElementById('points-of-contact');
 const $tableBody = document.getElementById('statistics');
 const $schema = document.getElementById('schema');
+const $hiddenSurprise = document.getElementById('hidden-surprise');
 
 function colorCountId(color) {
   return `${color}-value`;
