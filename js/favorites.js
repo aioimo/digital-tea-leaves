@@ -52,12 +52,24 @@ const DIAGANOL_FIVE = {
   colors: 5,
 };
 
-// high threshold
-const DIAGANOL_THREE = {
+// High threshold, big loose shapes
+// one dominant, no extinctions
+const DIAGANOL_3C_12R_25T = {
   id: 'diaganol_t8_r4_c3',
   schema: 'diaganol',
   gridSize: 125,
   radius: 12,
   threshold: 25,
+  colors: 3,
+};
+
+// High threshold, intricate patterns,
+// one dominant, no extinctions
+const DIAGANOL_03C_08R_18T = {
+  id: 'diaganol_t8_r4_c3',
+  schema: 'diaganol',
+  gridSize: 125,
+  radius: 8,
+  threshold: 18,
   colors: 3,
 };

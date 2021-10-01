@@ -2,8 +2,7 @@
 const EDIT_MODE = false;
 
 const ACTIVE_SCHEMA = pickN(
-  // [DUEL, THREE_COLOR_SIMPLE, DIAGANOL_THREE, DIAGANOL_FIVE],
-  [DIAGANOL_THREE],
+  [DUEL, THREE_COLOR_SIMPLE, DIAGANOL_03C_08R_18T],
   1
 )[0];
 console.log('Hello! I hope you enjoy my creation.');
