@@ -25,7 +25,7 @@ function handleStop() {
   $reset.classList.remove('hidden');
   clearInterval(interval);
   // $start.innerText = 'START';
-  $start.classList.add('green');
+  // $start.classList.add('start-button');
   // $start.classList.remove('red');
   $radius.disabled = false;
   $threshold.disabled = false;
@@ -35,7 +35,7 @@ function handleStop() {
 function handleStart() {
   // $start.innerText = 'STOP';
   // $start.classList.add('red');
-  $start.classList.remove('green');
+  // $start.classList.remove('start-button');
   $radius.disabled = true;
   $colors.disabled = true;
   $threshold.disabled = true;
