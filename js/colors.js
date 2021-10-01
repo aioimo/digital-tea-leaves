@@ -58,6 +58,11 @@ const goodColorSchemes = {
       { title: '#FFDA22', color: '#FFDA22' }, // Sizzling Sunrise
       { title: '#F5F9E9', color: '#F5F9E9' }, // Ivory
     ],
+    [
+      { title: '#2d9d92', color: '#2d9d92' },
+      { title: 'black', color: 'black' },
+      { title: 'white', color: 'white' },
+    ],
   ],
 };
 
