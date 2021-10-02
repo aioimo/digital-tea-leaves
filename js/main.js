@@ -39,6 +39,7 @@ function onAfterEffect(matrix) {
 
 // Handlers
 function handleStop(matrix) {
+  $saveButton.classList.remove('hidden');
   $shuffle.classList.remove('hidden');
   $reset.classList.remove('hidden');
   clearInterval(interval);
@@ -53,6 +54,7 @@ function handleStop(matrix) {
 }
 
 function handleStart() {
+  $saveButton.classList.add('hidden');
   $shuffle.classList.add('hidden');
   // $start.innerText = 'STOP';
   // $start.classList.add('red');
@@ -60,6 +62,24 @@ function handleStart() {
   $radius.disabled = true;
   $colors.disabled = true;
   $threshold.disabled = true;
+}
+
+function download_image() {
+  // Dump the canvas contents to a file.
+  $canvas.toBlob(function (blob) {
+    saveAs(blob, 'output.png');
+  }, 'image/png');
+}
+
+function saveAs(blob, filename) {
+  const url = URL.createObjectURL(blob); // Create the URL from the blob object
+  const a = document.createElement('a'); // Create the anchor tag
+  a.href = url; // Assign the URL string to the anchor tag's href attribute
+  a.download = filename; // Name the image by assigning the anchor tag's download attribute
+  document.body.appendChild(a); // Append the anchor tag to the DOM
+  a.click(); // Click the anchor tag to trigger the download
+  document.body.removeChild(a); // Remove the anchor tag from the DOM
+  URL.revokeObjectURL(url); // Release the reference to the ObjectURL
 }
 
 function handleRadiusChange(value) {
@@ -103,6 +123,7 @@ $next.onclick = function () {
 
 $reset.onclick = function () {
   matrix.reset();
+  $saveButton.classList.add('hidden');
   $colors.disabled = false;
   $reset.classList.add('hidden');
   $start.classList.remove('hidden');
