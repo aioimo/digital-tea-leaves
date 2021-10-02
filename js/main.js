@@ -39,6 +39,7 @@ function onAfterEffect(matrix) {
 
 // Handlers
 function handleStop(matrix) {
+  $shuffle.classList.remove('hidden');
   $reset.classList.remove('hidden');
   clearInterval(interval);
   // $start.innerText = 'START';
@@ -52,6 +53,7 @@ function handleStop(matrix) {
 }
 
 function handleStart() {
+  $shuffle.classList.add('hidden');
   // $start.innerText = 'STOP';
   // $start.classList.add('red');
   // $start.classList.remove('start-button');
@@ -80,7 +82,13 @@ function handleSchemaChange(value) {
   matrix.stable = false;
 }
 
+function handleShuffle() {
+  window.location.reload();
+}
+
 // Listeners
+$shuffle.onclick = handleShuffle;
+
 $colors.onchange = function () {
   const colors = getActiveColors();
   updateColorsStatisticsBoard(colors);

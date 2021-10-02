@@ -81,9 +81,16 @@ td {
   border: none;
   color: white;
   cursor: pointer;
-  font-size: 2.8rem;
   transition: all 0.3s ease-in-out;
   border-radius: 5px;
+}
+
+.button-big {
+  font-size: 2.8rem;
+}
+
+.button-small {
+  font-size: 1.4rem;
 }
 
 .button:hover {
