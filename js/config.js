@@ -1,10 +1,7 @@
 // Defaults
 const EDIT_MODE = false;
 
-const ACTIVE_SCHEMA = pickN(
-  [DUEL, THREE_COLOR_SIMPLE, DIAGANOL_03C_08R_18T],
-  1
-)[0];
+const ACTIVE_SCHEMA = pickN([DIAGANOL_03C_08R_18T], 1)[0];
 console.log('Hello! I hope you enjoy my creation.');
 
 // Default grid size
