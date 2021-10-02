@@ -29,6 +29,7 @@ const $tableBody = document.getElementById('statistics');
 const $schema = document.getElementById('schema');
 const $hiddenSurprise = document.getElementById('hidden-surprise');
 const $shuffle = document.getElementById('shuffle');
+const $saveButton = document.getElementById('save-button');
 
 function colorCountId(color) {
   return `${color}-value`;
