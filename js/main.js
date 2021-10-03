@@ -4,7 +4,6 @@ let interval;
 const defaultColors = getActiveColors();
 
 updateColorsStatisticsBoard(defaultColors);
-updateRadiusValue(defaultRadius);
 
 // window.onload = () => {
 //   if (EDIT_MODE) {
@@ -19,44 +18,12 @@ const game = new GameBoard(
   defaultThreshold
 );
 
-// Special Effects
-function handle69(n) {
-  if (n === 69) {
-    $hiddenSurprise.classList.remove('hidden');
-    $hiddenSurprise.innerText = ';)';
-  }
-}
-
-function clearAfterEffects() {
-  $hiddenSurprise.classList.add('hidden');
-  $hiddenSurprise.innerText = '';
-}
-
-function onAfterEffect(game) {
-  handle69(game.matrix.numberIterations);
-}
-
 // Handlers
-function handleStop(game) {
-  $shuffle.classList.remove('hidden');
-  $reset.classList.remove('hidden');
-  clearInterval(interval);
-  $radius.disabled = false;
-  $threshold.disabled = false;
-  interval = null;
-  onAfterEffect(game);
-  handleData(game.matrix);
-}
-
 function handleRadiusChange(value) {
-  $radius.value = value;
-  updateRadiusValue(value);
   game.setRadius(value);
 }
 
 function handleThresholdChange(value) {
-  $threshold.value = value;
-  updateThresholdDisplayValue(value);
   game.setThreshold(value);
 }
 
@@ -89,13 +56,13 @@ $start.onclick = function () {
   $start.classList.add('hidden');
 
   if (interval) {
-    handleStop();
+    game.handleGameEnd();
   } else {
     game.handleStart();
     interval = setInterval(() => {
       game.nextState();
       if (game.isStable()) {
-        handleStop(game);
+        game.handleGameEnd();
       }
     }, 75);
   }

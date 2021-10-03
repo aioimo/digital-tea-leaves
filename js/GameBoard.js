@@ -72,7 +72,7 @@ class GameBoard {
     $colors.disabled = false;
     $reset.classList.add('hidden');
     $start.classList.remove('hidden');
-    clearAfterEffects();
+    this.clearAfterEffects();
   }
 
   setColors(colors) {
@@ -81,11 +81,14 @@ class GameBoard {
 
   setThreshold(val) {
     this.matrix.setThreshold(val);
+    $threshold.value = this.matrix.threshold;
+    $threshold_display_value.innerText = this.matrix.threshold;
     this.updateRadiusDisplay();
   }
 
   setRadius(val) {
     this.matrix.setRadius(val);
+    $radius_display_value.innerText = this.matrix.radius;
     this.updateRadiusDisplay();
   }
 
@@ -147,5 +150,33 @@ class GameBoard {
       const $region = document.getElementById(numberRegions(color));
       $region.innerText = results[color] || 0;
     });
+  }
+
+  handleGameEnd() {
+    $shuffle.classList.remove('hidden');
+    $reset.classList.remove('hidden');
+    clearInterval(interval);
+    $radius.disabled = false;
+    $threshold.disabled = false;
+    interval = null;
+    this.onAfterEffect();
+    handleData(this.matrix);
+  }
+
+  clearAfterEffects() {
+    $hiddenSurprise.classList.add('hidden');
+    $hiddenSurprise.innerText = '';
+  }
+
+  handle69() {
+    const n = this.matrix.numberIterations;
+    if (n === 69) {
+      $hiddenSurprise.classList.remove('hidden');
+      $hiddenSurprise.innerText = ';)';
+    }
+  }
+
+  onAfterEffect() {
+    this.handle69();
   }
 }

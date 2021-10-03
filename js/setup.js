@@ -46,14 +46,6 @@ function colorChangeId(color) {
   return `${color}-change`;
 }
 
-function updateRadiusValue(value) {
-  $radius_display_value.innerText = value;
-}
-
-function updateThresholdDisplayValue(value) {
-  $threshold_display_value.innerText = value;
-}
-
 function updateThresholdMaximum(value) {
   $threshold.max = value;
   $threshold_max.innerText = value;
