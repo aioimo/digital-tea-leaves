@@ -47,9 +47,9 @@ class RadiusDisplay {
 
   calculateNumberContactPoints() {
     $points_of_contact.innerText = this.neighbouringPoints;
-    updateThresholdMaximum(this.neighbouringPoints);
+    this.updateThresholdMaximum();
 
-    if (this.threshold > this.neighbouringPoints) {
+    if (this.threshold > this.thresholdMaximum) {
       handleThresholdChange(this.neighbouringPoints);
     }
   }
@@ -70,5 +70,11 @@ class RadiusDisplay {
     );
 
     radius_ctx.restore();
+  }
+
+  updateThresholdMaximum() {
+    this.thresholdMaximum = this.neighbouringPoints;
+    $threshold.max = this.thresholdMaximum;
+    $threshold_max.innerText = this.thresholdMaximum;
   }
 }

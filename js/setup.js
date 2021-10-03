@@ -46,11 +46,6 @@ function colorChangeId(color) {
   return `${color}-change`;
 }
 
-function updateThresholdMaximum(value) {
-  $threshold.max = value;
-  $threshold_max.innerText = value;
-}
-
 function createCheckbox({ title, color }) {
   const $div = document.createElement('div');
 
