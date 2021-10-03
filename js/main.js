@@ -98,8 +98,8 @@ $favorites.onchange = function (e) {
 
   setColours(newColors);
   updateColorsStatisticsBoard(newColors);
-  game.setThreshold(value);
-  game.setRadius(value);
+  game.setThreshold(threshold);
+  game.setRadius(radius);
   game.handleSchemaChange(schema);
   game.setColors(newColors);
   game.reset();
