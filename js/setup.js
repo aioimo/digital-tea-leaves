@@ -79,10 +79,19 @@ function createCheckbox({ title, color }) {
   $colors.appendChild($div);
 }
 
-function createAllCheckboxes(colors) {
-  colors.forEach((color) => {
-    createCheckbox(color);
+function clearAllDomCheckboxes() {
+  $colors.innerHTML = '';
+}
+
+function createAllDomCheckboxes(colorSchemas) {
+  colorSchemas.forEach((colorSchemas) => {
+    createCheckbox(colorSchemas);
   });
+}
+
+function updateAllDomCheckboxes(newColorSchema) {
+  clearAllDomCheckboxes();
+  createAllDomCheckboxes(newColorSchema);
 }
 
 function clearAllRows() {
@@ -145,7 +154,9 @@ function resetColours() {
 }
 
 function setColours(colors) {
+  const schema = colors.map((c) => ({ title: c, color: c }));
   resetColours();
+  updateAllDomCheckboxes(schema);
   colors.forEach((color) => {
     $input = document.getElementById(color);
     $input.checked = true;
@@ -159,7 +170,7 @@ function getActiveColors() {
 }
 
 // Create all checkboxes
-createAllCheckboxes(colorSchema);
+createAllDomCheckboxes(colorSchema);
 
 // Set radius to default
 $radius.value = defaultRadius;
