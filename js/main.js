@@ -62,12 +62,12 @@ $start.onclick = function () {
 
 $radius.oninput = function (e) {
   const radius = e.target.value;
-  game.setRadius(value);
+  game.setRadius(radius);
 };
 
 $radius.onchange = function (e) {
   const radius = e.target.value;
-  game.setRadius(value);
+  game.setRadius(radius);
 };
 
 $threshold.oninput = function (e) {
