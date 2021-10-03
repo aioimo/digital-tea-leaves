@@ -2,7 +2,11 @@ class GameBoard {
   constructor(colors, gridSize, radius, threshold) {
     this.matrix = new Matrix(colors, gridSize, radius, threshold);
 
-    this.radiusDisplay = new RadiusDisplay({ radius, threshold });
+    this.radiusDisplay = new RadiusDisplay({
+      radius,
+      threshold,
+      numberColors: colors.length,
+    });
 
     this.draw();
     this.updateStatistics();
@@ -13,6 +17,7 @@ class GameBoard {
     this.radiusDisplay.recalculate({
       radius: this.matrix.radius,
       threshold: this.matrix.threshold,
+      numberColors: this.matrix.colors.length,
     });
   }
 

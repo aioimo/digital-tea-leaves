@@ -22,6 +22,7 @@ const $threshold_display_value = document.getElementById(
 );
 const $favorites = document.getElementById('favorites');
 const $threshold_max = document.getElementById('threshold_max');
+const $threshold_min = document.getElementById('threshold_min');
 const $radius_display_value = document.getElementById('radius-value');
 const $iterations = document.getElementById('iterations');
 const $points_of_contact = document.getElementById('points-of-contact');
@@ -29,6 +30,8 @@ const $tableBody = document.getElementById('statistics');
 const $schema = document.getElementById('schema');
 const $hiddenSurprise = document.getElementById('hidden-surprise');
 const $shuffle = document.getElementById('shuffle');
+const $difficulty = document.getElementById('difficulty');
+const $expected = document.getElementById('expected');
 
 function colorCountId(color) {
   return `${color}-value`;

@@ -1,17 +1,26 @@
 class RadiusDisplay {
-  constructor({ radius, threshold }) {
-    this.recalculate({ radius, threshold });
+  constructor({ radius, threshold, numberColors }) {
+    this.recalculate({ radius, threshold, numberColors });
   }
 
-  recalculate({ radius, threshold }) {
+  recalculate({ radius, threshold, numberColors }) {
     this.radius = radius;
     this.threshold = threshold;
+    this.numberColors = numberColors;
     this.length = radius * 2 + 1;
     this.squareSize = H_100_RADIUS / this.length;
     this.neighbouringPoints = 0;
+    this.expected = 1 / this.numberColors;
+
     this.draw();
     this.activeSquares();
     this.calculateNumberContactPoints();
+    this.updateThresholdMinimum();
+    this.difficulty = this.threshold / this.neighbouringPoints;
+    this.normalisedDifficulty =
+      (this.difficulty - this.expected) * (1 / (1 - this.expected));
+    this.updateDifficulty();
+    this.updateExpected();
   }
 
   draw() {
@@ -52,6 +61,10 @@ class RadiusDisplay {
     if (this.threshold > this.thresholdMaximum) {
       handleThresholdChange(this.neighbouringPoints);
     }
+
+    if (this.threshold < this.calculateThresholdMinimum()) {
+      handleThresholdChange(this.calculateThresholdMinimum());
+    }
   }
 
   drawEmptySquare(row, col) {
@@ -72,9 +85,29 @@ class RadiusDisplay {
     radius_ctx.restore();
   }
 
+  calculateThresholdMinimum() {
+    return Math.floor(this.neighbouringPoints / this.numberColors) + 1;
+  }
+
   updateThresholdMaximum() {
     this.thresholdMaximum = this.neighbouringPoints;
     $threshold.max = this.thresholdMaximum;
     $threshold_max.innerText = this.thresholdMaximum;
+  }
+
+  updateThresholdMinimum() {
+    const min = this.calculateThresholdMinimum();
+    $threshold.min = min;
+    $threshold_min.innerText = min;
+  }
+
+  updateDifficulty() {
+    const percentage = this.normalisedDifficulty * 100;
+    $difficulty.innerText = `${percentage.toFixed(2)} %`;
+  }
+
+  updateExpected() {
+    const percentage = this.expected * 100;
+    $expected.innerText = `${percentage.toFixed(2)} %`;
   }
 }
