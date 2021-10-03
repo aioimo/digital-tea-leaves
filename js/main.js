@@ -35,20 +35,20 @@ function clearAfterEffects() {
   $hiddenSurprise.innerText = '';
 }
 
-function onAfterEffect(matrix) {
-  handle69(matrix.numberIterations);
+function onAfterEffect(game) {
+  handle69(game.matrix.numberIterations);
 }
 
 // Handlers
-function handleStop(matrix) {
+function handleStop(game) {
   $shuffle.classList.remove('hidden');
   $reset.classList.remove('hidden');
   clearInterval(interval);
   $radius.disabled = false;
   $threshold.disabled = false;
   interval = null;
-  onAfterEffect(matrix);
-  handleData(matrix);
+  onAfterEffect(game);
+  handleData(game.matrix);
 }
 
 function handleStart() {
@@ -65,7 +65,7 @@ function handleRadiusChange(value) {
   $radius.value = value;
   updateRadiusValue(value);
   // radiusDisplay.updateRadius(value);
-  matrix.setRadius(value);
+  game.setRadius(value);
 }
 
 function handleThresholdChange(value) {
@@ -123,7 +123,7 @@ $start.onclick = function () {
     interval = setInterval(() => {
       game.nextState();
       if (game.isStable()) {
-        handleStop(game.matrix);
+        handleStop(game);
       }
     }, 75);
   }

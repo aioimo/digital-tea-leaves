@@ -45,6 +45,10 @@ class GameBoard {
     this.matrix.setThreshold(val);
   }
 
+  setRadius(val) {
+    this.matrix.setRadius(val);
+  }
+
   drawSquare(row, col) {
     const color = this.matrix.state[row][col];
     ctx.save();
