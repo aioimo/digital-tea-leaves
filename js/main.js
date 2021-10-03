@@ -1,7 +1,7 @@
 let interval;
 
 // Initialisation
-const defaultColors = getActiveColors();
+const defaultColors = colorSchema.map((s) => s.color);
 
 updateColorsStatisticsBoard(defaultColors);
 
@@ -19,14 +19,6 @@ const game = new GameBoard(
 );
 
 // Handlers
-function handleRadiusChange(value) {
-  game.setRadius(value);
-}
-
-function handleThresholdChange(value) {
-  game.setThreshold(value);
-}
-
 function handleShuffle() {
   window.location.reload();
 }
@@ -70,22 +62,22 @@ $start.onclick = function () {
 
 $radius.oninput = function (e) {
   const radius = e.target.value;
-  handleRadiusChange(radius);
+  game.setRadius(value);
 };
 
 $radius.onchange = function (e) {
   const radius = e.target.value;
-  handleRadiusChange(radius);
+  game.setRadius(value);
 };
 
 $threshold.oninput = function (e) {
-  const threshold = e.target.value;
-  handleThresholdChange(threshold);
+  const value = e.target.value;
+  game.setThreshold(value);
 };
 
 $threshold.onchange = function (e) {
-  const threshold = e.target.value;
-  handleThresholdChange(threshold);
+  const value = e.target.value;
+  game.setThreshold(value);
 };
 
 $favorites.onchange = function (e) {
@@ -106,8 +98,8 @@ $favorites.onchange = function (e) {
 
   setColours(newColors);
   updateColorsStatisticsBoard(newColors);
-  handleThresholdChange(threshold);
-  handleRadiusChange(radius);
+  game.setThreshold(value);
+  game.setRadius(value);
   game.handleSchemaChange(schema);
   game.setColors(newColors);
   game.reset();

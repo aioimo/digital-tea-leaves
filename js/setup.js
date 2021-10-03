@@ -49,41 +49,6 @@ function colorChangeId(color) {
   return `${color}-change`;
 }
 
-function createCheckbox({ title, color }) {
-  const $div = document.createElement('div');
-
-  const $input = document.createElement('input');
-  $input.type = 'checkbox';
-  $input.id = title;
-  $input.name = title;
-  $input.value = title;
-  $input.checked = EDIT_MODE ? random(['checked', null]) : 'checked';
-
-  const $label = document.createElement('label');
-  $label.innerText = color;
-  $label.for = color;
-
-  $div.appendChild($input);
-  $div.appendChild($label);
-
-  $colors.appendChild($div);
-}
-
-function clearAllDomCheckboxes() {
-  $colors.innerHTML = '';
-}
-
-function createAllDomCheckboxes(colorSchemas) {
-  colorSchemas.forEach((colorSchemas) => {
-    createCheckbox(colorSchemas);
-  });
-}
-
-function updateAllDomCheckboxes(newColorSchema) {
-  clearAllDomCheckboxes();
-  createAllDomCheckboxes(newColorSchema);
-}
-
 function clearAllRows() {
   $tableBody.innerHTML = '';
 }
@@ -153,14 +118,11 @@ function setColours(colors) {
   });
 }
 
-function getActiveColors() {
+function getActiveColorsFromDom() {
   return Array.from($colors.querySelectorAll('input'))
     .filter((color) => color.checked)
     .map((color) => color.name);
 }
-
-// Create all checkboxes
-createAllDomCheckboxes(colorSchema);
 
 // Set radius to default
 $radius.value = defaultRadius;

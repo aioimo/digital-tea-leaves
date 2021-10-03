@@ -1,16 +1,57 @@
 class GameBoard {
   constructor(colors, gridSize, radius, threshold) {
+    console.log('COLORS', colors);
     this.matrix = new Matrix(colors, gridSize, radius, threshold);
 
     this.radiusDisplay = new RadiusDisplay({
       radius,
       threshold,
       numberColors: colors.length,
+      matrix: this.matrix,
     });
+
+    this.updateAllDomCheckboxes();
 
     this.draw();
     this.updateStatistics();
     this.updateRegions();
+  }
+
+  // Create all checkboxes
+
+  createCheckbox({ title, color }) {
+    const $div = document.createElement('div');
+
+    const $input = document.createElement('input');
+    $input.type = 'checkbox';
+    $input.id = title;
+    $input.name = title;
+    $input.value = title;
+    $input.checked = EDIT_MODE ? random(['checked', null]) : 'checked';
+
+    const $label = document.createElement('label');
+    $label.innerText = color;
+    $label.for = color;
+
+    $div.appendChild($input);
+    $div.appendChild($label);
+
+    $colors.appendChild($div);
+  }
+
+  createAllDomCheckboxes() {
+    this.matrix.colors.forEach((color) => {
+      this.createCheckbox({ title: color, color: color });
+    });
+  }
+
+  clearAllDomCheckboxes() {
+    $colors.innerHTML = '';
+  }
+
+  updateAllDomCheckboxes() {
+    this.clearAllDomCheckboxes();
+    this.createAllDomCheckboxes();
   }
 
   updateRadiusDisplay() {
@@ -18,6 +59,7 @@ class GameBoard {
       radius: this.matrix.radius,
       threshold: this.matrix.threshold,
       numberColors: this.matrix.colors.length,
+      matrix: this.matrix,
     });
   }
 
@@ -33,7 +75,7 @@ class GameBoard {
   }
 
   handleColorChange() {
-    const colors = getActiveColors();
+    const colors = getActiveColorsFromDom();
     updateColorsStatisticsBoard(colors);
     this.setColors(colors);
     this.reset();
@@ -85,6 +127,7 @@ class GameBoard {
   }
 
   setThreshold(val) {
+    console.log('SET THRESHOLD', this);
     this.matrix.setThreshold(val);
     $threshold.value = this.matrix.threshold;
     $threshold_display_value.innerText = this.matrix.threshold;

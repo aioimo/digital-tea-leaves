@@ -1,9 +1,14 @@
 class RadiusDisplay {
-  constructor({ radius, threshold, numberColors }) {
-    this.recalculate({ radius, threshold, numberColors });
+  constructor({ radius, threshold, numberColors, matrix }) {
+    this.recalculate({
+      radius,
+      threshold,
+      numberColors,
+      matrix,
+    });
   }
 
-  recalculate({ radius, threshold, numberColors }) {
+  recalculate({ radius, threshold, numberColors, matrix }) {
     this.radius = radius;
     this.threshold = threshold;
     this.numberColors = numberColors;
@@ -11,6 +16,7 @@ class RadiusDisplay {
     this.squareSize = H_100_RADIUS / this.length;
     this.neighbouringPoints = 0;
     this.expected = 1 / this.numberColors;
+    this.updateThreshold = matrix.setThreshold;
 
     this.draw();
     this.activeSquares();
@@ -20,7 +26,6 @@ class RadiusDisplay {
     this.normalisedDifficulty =
       (this.difficulty - this.expected) * (1 / (1 - this.expected));
     this.updateDifficulty();
-    this.updateExpected();
   }
 
   draw() {
@@ -59,11 +64,11 @@ class RadiusDisplay {
     this.updateThresholdMaximum();
 
     if (this.threshold > this.thresholdMaximum) {
-      handleThresholdChange(this.neighbouringPoints);
+      this.updateThreshold(this.neighbouringPoints);
     }
 
     if (this.threshold < this.calculateThresholdMinimum()) {
-      handleThresholdChange(this.calculateThresholdMinimum());
+      this.updateThreshold(this.calculateThresholdMinimum());
     }
   }
 
@@ -104,10 +109,5 @@ class RadiusDisplay {
   updateDifficulty() {
     const percentage = this.normalisedDifficulty * 100;
     $difficulty.innerText = `${percentage.toFixed(2)} %`;
-  }
-
-  updateExpected() {
-    const percentage = this.expected * 100;
-    $expected.innerText = `${percentage.toFixed(2)} %`;
   }
 }
