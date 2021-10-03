@@ -1,6 +1,11 @@
 class GameBoard {
-  constructor(matrix) {
-    this.matrix = matrix;
+  constructor(defaultColors, defaultGridSize, defaultRadius, defaultThreshold) {
+    this.matrix = new Matrix(
+      defaultColors,
+      defaultGridSize,
+      defaultRadius,
+      defaultThreshold
+    );
 
     this.draw();
     this.updateStatistics();

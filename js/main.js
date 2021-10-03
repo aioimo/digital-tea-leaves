@@ -12,13 +12,12 @@ updateRadiusValue(defaultRadius);
 //   }
 // };
 
-const matrix = new Matrix(
+const game = new GameBoard(
   defaultColors,
   defaultGridSize,
   defaultRadius,
   defaultThreshold
 );
-const game = new GameBoard(matrix);
 
 // const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
 
