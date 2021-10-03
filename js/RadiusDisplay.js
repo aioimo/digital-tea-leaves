@@ -1,16 +1,12 @@
 class RadiusDisplay {
-  constructor({ radius }) {
-    this.radius = Number(radius);
-    this.setup();
+  constructor({ radius, threshold }) {
+    this.recalculate({ radius, threshold });
   }
 
-  updateRadius(r) {
-    this.radius = Number(r);
-    this.setup();
-  }
-
-  setup() {
-    this.length = this.radius * 2 + 1;
+  recalculate({ radius, threshold }) {
+    this.radius = radius;
+    this.threshold = threshold;
+    this.length = radius * 2 + 1;
     this.squareSize = H_100_RADIUS / this.length;
     this.neighbouringPoints = 0;
     this.draw();
@@ -53,7 +49,7 @@ class RadiusDisplay {
     $points_of_contact.innerText = this.neighbouringPoints;
     updateThresholdMaximum(this.neighbouringPoints);
 
-    if (matrix.threshold > this.neighbouringPoints) {
+    if (this.threshold > this.neighbouringPoints) {
       handleThresholdChange(this.neighbouringPoints);
     }
   }

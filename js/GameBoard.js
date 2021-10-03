@@ -1,15 +1,44 @@
 class GameBoard {
-  constructor(defaultColors, defaultGridSize, defaultRadius, defaultThreshold) {
-    this.matrix = new Matrix(
-      defaultColors,
-      defaultGridSize,
-      defaultRadius,
-      defaultThreshold
-    );
+  constructor(colors, gridSize, radius, threshold) {
+    this.matrix = new Matrix(colors, gridSize, radius, threshold);
+
+    this.radiusDisplay = new RadiusDisplay({ radius, threshold });
 
     this.draw();
     this.updateStatistics();
     this.updateRegions();
+  }
+
+  updateRadiusDisplay() {
+    this.radiusDisplay.recalculate({
+      radius: this.matrix.radius,
+      threshold: this.matrix.threshold,
+    });
+  }
+
+  handleStart() {
+    console.log($schema.value);
+    $shuffle.classList.add('hidden');
+    // $start.innerText = 'STOP';
+    // $start.classList.add('red');
+    // $start.classList.remove('start-button');
+    $radius.disabled = true;
+    $colors.disabled = true;
+    $threshold.disabled = true;
+  }
+
+  handleColorChange() {
+    const colors = getActiveColors();
+    updateColorsStatisticsBoard(colors);
+    this.setColors(colors);
+    this.reset();
+  }
+
+  handleSchemaChange(value) {
+    $schema.value = value;
+    filterSchema = chooseSchema(value);
+    this.matrix.stable = false;
+    this.updateRadiusDisplay();
   }
 
   draw() {
@@ -40,6 +69,10 @@ class GameBoard {
     this.draw();
     this.updateStatistics();
     this.updateRegions();
+    $colors.disabled = false;
+    $reset.classList.add('hidden');
+    $start.classList.remove('hidden');
+    clearAfterEffects();
   }
 
   setColors(colors) {
@@ -48,10 +81,12 @@ class GameBoard {
 
   setThreshold(val) {
     this.matrix.setThreshold(val);
+    this.updateRadiusDisplay();
   }
 
   setRadius(val) {
     this.matrix.setRadius(val);
+    this.updateRadiusDisplay();
   }
 
   drawSquare(row, col) {
