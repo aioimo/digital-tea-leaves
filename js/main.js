@@ -66,13 +66,13 @@ function handleRadiusChange(value) {
   $radius.value = value;
   updateRadiusValue(value);
   radiusDisplay.updateRadius(value);
-  matrix.updateRadius(value);
+  matrix.setRadius(value);
 }
 
 function handleThresholdChange(value) {
   $threshold.value = value;
   updateThresholdDisplayValue(value);
-  matrix.updateThreshold(value);
+  matrix.setThreshold(value);
 }
 
 function handleSchemaChange(value) {
@@ -92,7 +92,7 @@ $shuffle.onclick = handleShuffle;
 $colors.onchange = function () {
   const colors = getActiveColors();
   updateColorsStatisticsBoard(colors);
-  matrix.updateColors(colors);
+  matrix.setColors(colors);
   matrix.reset();
 };
 
@@ -171,6 +171,6 @@ $favorites.onchange = function (e) {
   handleThresholdChange(threshold);
   handleRadiusChange(radius);
   handleSchemaChange(schema);
-  matrix.updateColors(newColors);
+  matrix.setColors(newColors);
   matrix.reset();
 };

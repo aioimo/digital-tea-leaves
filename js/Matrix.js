@@ -28,24 +28,23 @@ class Matrix {
   }
 
   update() {
-    this.numberIterations++;
     this.nextState();
     this.draw();
     this.updateStatistics();
     this.updateRegions();
   }
 
-  updateRadius(r) {
+  setRadius(r) {
     this.radius = Number(r);
     matrix.stable = false;
   }
 
-  updateThreshold(val) {
+  setThreshold(val) {
     this.threshold = Number(val);
     matrix.stable = false;
   }
 
-  updateColors(colors) {
+  setColors(colors) {
     this.colors = colors;
   }
 
@@ -187,11 +186,8 @@ class Matrix {
     return this.determine(this.most(this.neighbors(row, col)));
   }
 
-  updateState(state) {
-    this.state = state;
-  }
-
   nextState() {
+    this.numberIterations++;
     const currentState = this.state;
 
     const rows = currentState.length;
@@ -214,6 +210,6 @@ class Matrix {
       this.stable = true;
     }
 
-    this.updateState(nextState);
+    this.state = nextState;
   }
 }
