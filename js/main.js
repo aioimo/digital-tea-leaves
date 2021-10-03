@@ -18,7 +18,9 @@ const matrix = new Matrix(
   defaultRadius,
   defaultThreshold
 );
-const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
+const game = new GameBoard(matrix);
+
+// const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
 
 // Special Effects
 function handle69(n) {
@@ -42,9 +44,6 @@ function handleStop(matrix) {
   $shuffle.classList.remove('hidden');
   $reset.classList.remove('hidden');
   clearInterval(interval);
-  // $start.innerText = 'START';
-  // $start.classList.add('start-button');
-  // $start.classList.remove('red');
   $radius.disabled = false;
   $threshold.disabled = false;
   interval = null;
@@ -65,21 +64,21 @@ function handleStart() {
 function handleRadiusChange(value) {
   $radius.value = value;
   updateRadiusValue(value);
-  radiusDisplay.updateRadius(value);
+  // radiusDisplay.updateRadius(value);
   matrix.setRadius(value);
 }
 
 function handleThresholdChange(value) {
   $threshold.value = value;
   updateThresholdDisplayValue(value);
-  matrix.setThreshold(value);
+  game.setThreshold(value);
 }
 
 function handleSchemaChange(value) {
   $schema.value = value;
   filterSchema = chooseSchema(value);
-  radiusDisplay.setup();
-  matrix.stable = false;
+  // radiusDisplay.setup();
+  game.matrix.stable = false;
 }
 
 function handleShuffle() {
@@ -92,17 +91,17 @@ $shuffle.onclick = handleShuffle;
 $colors.onchange = function () {
   const colors = getActiveColors();
   updateColorsStatisticsBoard(colors);
-  matrix.setColors(colors);
-  matrix.reset();
+  game.setColors(colors);
+  game.reset();
 };
 
 $next.onclick = function () {
-  matrix.update();
+  game.nextState();
   $colors.disabled = true;
 };
 
 $reset.onclick = function () {
-  matrix.reset();
+  game.reset();
   $colors.disabled = false;
   $reset.classList.add('hidden');
   $start.classList.remove('hidden');
@@ -122,9 +121,9 @@ $start.onclick = function () {
   } else {
     handleStart();
     interval = setInterval(() => {
-      matrix.update();
-      if (matrix.stable) {
-        handleStop(matrix);
+      game.nextState();
+      if (game.isStable()) {
+        handleStop(game.matrix);
       }
     }, 75);
   }
@@ -171,6 +170,6 @@ $favorites.onchange = function (e) {
   handleThresholdChange(threshold);
   handleRadiusChange(radius);
   handleSchemaChange(schema);
-  matrix.setColors(newColors);
-  matrix.reset();
+  game.setColors(newColors);
+  game.reset();
 };
