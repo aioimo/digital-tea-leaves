@@ -53,9 +53,7 @@ class Matrix {
   }
 
   setThreshold(val) {
-    console.log('MATRIX SET THRESHOLD', val);
     this.threshold = Number(val);
-    console.log('this.threshold', this.threshold);
     this.stable = false;
   }
 
