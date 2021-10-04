@@ -1,8 +1,12 @@
+function getActiveColorsFromDom() {
+  return Array.from($colors.querySelectorAll('input'))
+    .filter((color) => color.checked)
+    .map((color) => color.name);
+}
+
 class GameBoard {
   constructor(colors, gridSize, radius, threshold) {
-    console.log('COLORS', colors);
     this.matrix = new Matrix(colors, gridSize, radius, threshold);
-
     this.radiusDisplay = new RadiusDisplay({
       radius,
       threshold,
@@ -10,48 +14,11 @@ class GameBoard {
       matrix: this.matrix,
     });
 
-    this.updateAllDomCheckboxes();
-
+    this.initialiseDomValues();
     this.draw();
+    this.updateColorsStatisticsBoard();
     this.updateStatistics();
     this.updateRegions();
-  }
-
-  // Create all checkboxes
-
-  createCheckbox({ title, color }) {
-    const $div = document.createElement('div');
-
-    const $input = document.createElement('input');
-    $input.type = 'checkbox';
-    $input.id = title;
-    $input.name = title;
-    $input.value = title;
-    $input.checked = EDIT_MODE ? random(['checked', null]) : 'checked';
-
-    const $label = document.createElement('label');
-    $label.innerText = color;
-    $label.for = color;
-
-    $div.appendChild($input);
-    $div.appendChild($label);
-
-    $colors.appendChild($div);
-  }
-
-  createAllDomCheckboxes() {
-    this.matrix.colors.forEach((color) => {
-      this.createCheckbox({ title: color, color: color });
-    });
-  }
-
-  clearAllDomCheckboxes() {
-    $colors.innerHTML = '';
-  }
-
-  updateAllDomCheckboxes() {
-    this.clearAllDomCheckboxes();
-    this.createAllDomCheckboxes();
   }
 
   updateRadiusDisplay() {
@@ -76,7 +43,6 @@ class GameBoard {
 
   handleColorChange() {
     const colors = getActiveColorsFromDom();
-    updateColorsStatisticsBoard(colors);
     this.setColors(colors);
     this.reset();
   }
@@ -120,6 +86,7 @@ class GameBoard {
     $reset.classList.add('hidden');
     $start.classList.remove('hidden');
     this.clearAfterEffects();
+    this.updateRadiusDisplay();
   }
 
   setColors(colors) {
@@ -127,7 +94,6 @@ class GameBoard {
   }
 
   setThreshold(val) {
-    console.log('SET THRESHOLD', this);
     this.matrix.setThreshold(val);
     $threshold.value = this.matrix.threshold;
     $threshold_display_value.innerText = this.matrix.threshold;
@@ -226,5 +192,122 @@ class GameBoard {
 
   onAfterEffect() {
     this.handle69();
+  }
+
+  initialiseDomValues() {
+    // Set radius to default
+    $radius.value = this.matrix.radius;
+    $radius_display_value.innerText = this.matrix.radius;
+
+    // Set threshold to default
+    $threshold.value = this.matrix.radius;
+    $threshold_display_value.innerText = this.matrix.radius;
+
+    // Set schema to default
+    $schema.value = defaultSchemaValue;
+    this.updateAllDomCheckboxes();
+  }
+
+  clearAllRows() {
+    $tableBody.innerHTML = '';
+  }
+
+  updateColorsStatisticsBoard() {
+    const colors = this.matrix.colors;
+    this.clearAllRows();
+    colors.forEach((color) => {
+      this.createRow({ color });
+    });
+  }
+
+  setColours(colors) {
+    this.matrix.colors = colors;
+    const newColors = this.matrix.colors;
+    const schema = newColors.map((c) => ({ title: c, color: c }));
+
+    this.updateAllDomCheckboxes(schema);
+
+    newColors.forEach((color) => {
+      const $input = document.getElementById(color);
+      $input.checked = true;
+    });
+  }
+
+  // Create all checkboxes
+  createCheckbox({ title, color }) {
+    const $div = document.createElement('div');
+
+    const $input = document.createElement('input');
+    $input.type = 'checkbox';
+    $input.id = title;
+    $input.name = title;
+    $input.value = title;
+    $input.checked = EDIT_MODE ? random(['checked', null]) : 'checked';
+
+    const $label = document.createElement('label');
+    $label.innerText = color;
+    $label.for = color;
+
+    $div.appendChild($input);
+    $div.appendChild($label);
+
+    $colors.appendChild($div);
+  }
+
+  createAllDomCheckboxes() {
+    this.matrix.colors.forEach((color) => {
+      this.createCheckbox({ title: color, color: color });
+    });
+  }
+
+  clearAllDomCheckboxes() {
+    $colors.innerHTML = '';
+  }
+
+  updateAllDomCheckboxes() {
+    this.clearAllDomCheckboxes();
+    this.createAllDomCheckboxes();
+  }
+
+  createRow({ color }) {
+    // td "Color"
+    const $col1 = document.createElement('td');
+
+    const $coloredSquare1 = document.createElement('div');
+    $coloredSquare1.classList.add('small-square');
+    // $coloredSquare1.innerText = color;
+    $coloredSquare1.style.color = color;
+    $coloredSquare1.style.backgroundColor = color;
+
+    $col1.appendChild($coloredSquare1);
+
+    // td "Count"
+    const $col2 = document.createElement('td');
+    $col2.classList.add('hidden');
+    $col2.id = colorCountId(color);
+
+    // td "Percentage"
+    const $col3 = document.createElement('td');
+    $col3.id = colorPercentageId(color);
+
+    // td "Number of regions"
+    const $col4 = document.createElement('td');
+    $col4.classList.add('hidden');
+    $col4.id = numberRegions(color);
+
+    // td "Delta"
+    const $col5 = document.createElement('td');
+    $col5.classList.add('hidden');
+    $col5.id = colorChangeId(color);
+
+    const $row = document.createElement('tr');
+
+    $row.appendChild($col1);
+    $row.appendChild($col2);
+    $row.appendChild($col3);
+    $row.appendChild($col4);
+    $row.appendChild($col5);
+
+    $tableBody.appendChild($row);
   }
 }

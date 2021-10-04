@@ -3,8 +3,6 @@ let interval;
 // Initialisation
 const defaultColors = colorSchema.map((s) => s.color);
 
-updateColorsStatisticsBoard(defaultColors);
-
 // window.onload = () => {
 //   if (EDIT_MODE) {
 //      make everything visible again
@@ -96,8 +94,8 @@ $favorites.onchange = function (e) {
 
   const newColors = pickN(allColors, n);
 
-  setColours(newColors);
-  updateColorsStatisticsBoard(newColors);
+  game.setColours(newColors);
+  game.updateColorsStatisticsBoard();
   game.setThreshold(threshold);
   game.setRadius(radius);
   game.handleSchemaChange(schema);
