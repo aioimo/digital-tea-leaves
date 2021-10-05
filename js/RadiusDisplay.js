@@ -37,7 +37,7 @@ class RadiusDisplay {
     for (let row = 0; row < LENGTH; row++) {
       for (let col = 0; col < LENGTH; col++) {
         if (row === RADIUS && col === RADIUS) {
-          this.drawSquare(row, col, 'lightgreen');
+          this.drawSquare(row, col, 'red');
         } else {
           this.drawEmptySquare(row, col);
         }
@@ -54,7 +54,7 @@ class RadiusDisplay {
         if (filterSchema(row, col, RADIUS)) continue;
 
         this.neighbouringPoints++;
-        this.drawSquare(row + RADIUS, col + RADIUS, 'red');
+        this.drawSquare(row + RADIUS, col + RADIUS, 'white');
       }
     }
   }
@@ -76,7 +76,7 @@ class RadiusDisplay {
     this.drawSquare(row, col);
   }
 
-  drawSquare(row, col, color = 'lightgrey') {
+  drawSquare(row, col, color = 'black') {
     radius_ctx.save();
     radius_ctx.fillStyle = color;
     radius_ctx.translate(this.squareSize * col, this.squareSize * row);
