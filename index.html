@@ -12,15 +12,18 @@
       <section class="hidden flex-col space-between">
         <div class="flex-col">
           <h1>Digital Tea Leaves</h1>
-          <section>
+          <section class="hidden">
             <canvas id="canvas-radius" width="500" height="500"></canvas>
           </section>
           <br />
-          <div class="hidden">
-            Points of Contacts: <span id="points-of-contact"></span>
+          <div class="white">
+            # Neighbours: <span id="points-of-contact"></span>
+            <br />
+            Difficulty: <span id="difficulty"></span>
+            <br />
           </div>
 
-          <div class="hidden margin-bottom">
+          <div class="margin-bottom">
             <h2>Schema</h2>
             <select id="schema" name="schema">
               <option value="grid">Grid</option>
@@ -38,26 +41,27 @@
             </select>
           </div>
 
-          <div class="hidden margin-bottom">
+          <div class="white margin-bottom">
             <h2>Radius: <span id="radius-value"></span></h2>
             1
             <input type="range" id="radius" name="radius" min="1" max="10" /> 10
           </div>
 
-          <div class="hidden margin-bottom">
+          <div class="white margin-bottom">
             <h2>Threshold: <span id="threshold_display_value"></span></h2>
-            0
+            <span id="threshold_min">0</span>
             <input
               type="range"
               id="threshold"
               name="threshold"
+              value="1"
               min="0"
               max="10"
             />
             <span id="threshold_max"></span>
           </div>
         </div>
-        <div class="hidden margin-bottom">
+        <div class="white margin-bottom">
           <label for="favorites">Favorites</label>
           <select id="favorites" name="favorites">
             <option value="">-</option>
@@ -72,7 +76,7 @@
       <section id="display-panel-section">
         <section id="colors-section">
           <h2>Colours</h2>
-          <fieldset id="colors" class="hidden margin-bottom"></fieldset>
+          <fieldset id="colors" class="hidden white margin-bottom"></fieldset>
         </section>
         <section id="distribution-section">
           <h2 class="hidden">Distribution</h2>
@@ -120,6 +124,7 @@
     <script src="./js/favorites.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/setup.js"></script>
+    <script src="./js/GameBoard.js"></script>
     <script src="./js/Matrix.js"></script>
     <script src="./js/RadiusDisplay.js"></script>
     <script src="./js/main.js"></script>

@@ -32,8 +32,8 @@ const X_PATTERN = (row, col) => Math.abs(row) !== Math.abs(col);
 const CRAZY = (row, col) => Math.abs(row) ** Math.abs(col) % 2 === 0;
 const ASYMETRIC = (row, col) => row % 2 === 1 || col % 2 === 1;
 const TWO_QUADRANTS = (row, col) => row * col > 0;
-const HOURGLASS = (row, col, radius) => Math.abs(row) < Math.abs(col);
-const WEAVE = (row, col, radius) => mod(row * col, 2) == 1;
+const HOURGLASS = (row, col) => Math.abs(row) < Math.abs(col);
+const WEAVE = (row, col) => mod(row * col, 2) == 1;
 const PERIMETER = (row, col, radius) =>
   Math.abs(row) < radius && Math.abs(col) < radius;
 

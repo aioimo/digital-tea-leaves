@@ -1,21 +1,31 @@
 class RadiusDisplay {
-  constructor({ radius }) {
-    this.radius = Number(radius);
-    this.setup();
+  constructor({ radius, threshold, numberColors, matrix }) {
+    this.recalculate({
+      radius,
+      threshold,
+      numberColors,
+      matrix,
+    });
   }
 
-  updateRadius(r) {
-    this.radius = Number(r);
-    this.setup();
-  }
-
-  setup() {
-    this.length = this.radius * 2 + 1;
+  recalculate({ radius, threshold, numberColors, matrix }) {
+    this.radius = radius;
+    this.threshold = threshold;
+    this.numberColors = numberColors;
+    this.length = radius * 2 + 1;
     this.squareSize = H_100_RADIUS / this.length;
     this.neighbouringPoints = 0;
+    this.expected = 1 / this.numberColors;
+    this.updateThreshold = matrix.setThreshold;
+
     this.draw();
     this.activeSquares();
     this.calculateNumberContactPoints();
+    this.updateThresholdMinimum();
+    this.difficulty = this.threshold / this.neighbouringPoints;
+    this.normalisedDifficulty =
+      (this.difficulty - this.expected) * (1 / (1 - this.expected));
+    this.updateDifficulty();
   }
 
   draw() {
@@ -27,7 +37,7 @@ class RadiusDisplay {
     for (let row = 0; row < LENGTH; row++) {
       for (let col = 0; col < LENGTH; col++) {
         if (row === RADIUS && col === RADIUS) {
-          this.drawSquare(row, col, 'lightgreen');
+          this.drawSquare(row, col, 'red');
         } else {
           this.drawEmptySquare(row, col);
         }
@@ -44,17 +54,21 @@ class RadiusDisplay {
         if (filterSchema(row, col, RADIUS)) continue;
 
         this.neighbouringPoints++;
-        this.drawSquare(row + RADIUS, col + RADIUS, 'red');
+        this.drawSquare(row + RADIUS, col + RADIUS, 'white');
       }
     }
   }
 
   calculateNumberContactPoints() {
     $points_of_contact.innerText = this.neighbouringPoints;
-    updateThresholdMaximum(this.neighbouringPoints);
+    this.updateThresholdMaximum();
 
-    if (matrix.threshold > this.neighbouringPoints) {
-      handleThresholdChange(this.neighbouringPoints);
+    if (this.threshold > this.thresholdMaximum) {
+      this.updateThreshold(this.neighbouringPoints);
+    }
+
+    if (this.threshold < this.calculateThresholdMinimum()) {
+      this.updateThreshold(this.calculateThresholdMinimum());
     }
   }
 
@@ -62,7 +76,7 @@ class RadiusDisplay {
     this.drawSquare(row, col);
   }
 
-  drawSquare(row, col, color = 'lightgrey') {
+  drawSquare(row, col, color = 'black') {
     radius_ctx.save();
     radius_ctx.fillStyle = color;
     radius_ctx.translate(this.squareSize * col, this.squareSize * row);
@@ -74,5 +88,26 @@ class RadiusDisplay {
     );
 
     radius_ctx.restore();
+  }
+
+  calculateThresholdMinimum() {
+    return Math.floor(this.neighbouringPoints / this.numberColors) + 1;
+  }
+
+  updateThresholdMaximum() {
+    this.thresholdMaximum = this.neighbouringPoints;
+    $threshold.max = this.thresholdMaximum;
+    $threshold_max.innerText = this.thresholdMaximum;
+  }
+
+  updateThresholdMinimum() {
+    const min = this.calculateThresholdMinimum();
+    $threshold.min = min;
+    $threshold_min.innerText = min;
+  }
+
+  updateDifficulty() {
+    const percentage = this.normalisedDifficulty * 100;
+    $difficulty.innerText = `${percentage.toFixed(2)} %`;
   }
 }

@@ -22,6 +22,7 @@ const $threshold_display_value = document.getElementById(
 );
 const $favorites = document.getElementById('favorites');
 const $threshold_max = document.getElementById('threshold_max');
+const $threshold_min = document.getElementById('threshold_min');
 const $radius_display_value = document.getElementById('radius-value');
 const $iterations = document.getElementById('iterations');
 const $points_of_contact = document.getElementById('points-of-contact');
@@ -29,6 +30,8 @@ const $tableBody = document.getElementById('statistics');
 const $schema = document.getElementById('schema');
 const $hiddenSurprise = document.getElementById('hidden-surprise');
 const $shuffle = document.getElementById('shuffle');
+const $difficulty = document.getElementById('difficulty');
+const $expected = document.getElementById('expected');
 
 function colorCountId(color) {
   return `${color}-value`;
@@ -45,129 +48,3 @@ function numberRegions(color) {
 function colorChangeId(color) {
   return `${color}-change`;
 }
-
-function updateRadiusValue(value) {
-  $radius_display_value.innerText = value;
-}
-
-function updateThresholdDisplayValue(value) {
-  $threshold_display_value.innerText = value;
-}
-
-function updateThresholdMaximum(value) {
-  $threshold.max = value;
-  $threshold_max.innerText = value;
-}
-
-function createCheckbox({ title, color }) {
-  const $div = document.createElement('div');
-
-  const $input = document.createElement('input');
-  $input.type = 'checkbox';
-  $input.id = title;
-  $input.name = title;
-  $input.value = title;
-  $input.checked = EDIT_MODE ? random(['checked', null]) : 'checked';
-
-  const $label = document.createElement('label');
-  $label.innerText = color;
-  $label.for = color;
-
-  $div.appendChild($input);
-  $div.appendChild($label);
-
-  $colors.appendChild($div);
-}
-
-function createAllCheckboxes(colors) {
-  colors.forEach((color) => {
-    createCheckbox(color);
-  });
-}
-
-function clearAllRows() {
-  $tableBody.innerHTML = '';
-}
-
-function createRow({ color }) {
-  // td "Color"
-  const $col1 = document.createElement('td');
-
-  const $coloredSquare1 = document.createElement('div');
-  $coloredSquare1.classList.add('small-square');
-  // $coloredSquare1.innerText = color;
-  $coloredSquare1.style.color = color;
-  $coloredSquare1.style.backgroundColor = color;
-
-  $col1.appendChild($coloredSquare1);
-
-  // td "Count"
-  const $col2 = document.createElement('td');
-  $col2.classList.add('hidden');
-  $col2.id = colorCountId(color);
-
-  // td "Percentage"
-  const $col3 = document.createElement('td');
-  $col3.id = colorPercentageId(color);
-
-  // td "Number of regions"
-  const $col4 = document.createElement('td');
-  $col4.classList.add('hidden');
-  $col4.id = numberRegions(color);
-
-  // td "Delta"
-  const $col5 = document.createElement('td');
-  $col5.classList.add('hidden');
-  $col5.id = colorChangeId(color);
-
-  const $row = document.createElement('tr');
-
-  $row.appendChild($col1);
-  $row.appendChild($col2);
-  $row.appendChild($col3);
-  $row.appendChild($col4);
-  $row.appendChild($col5);
-
-  $tableBody.appendChild($row);
-}
-
-function updateColorsStatisticsBoard(colors) {
-  clearAllRows();
-  colors.forEach((color) => {
-    createRow({ color });
-  });
-}
-
-function resetColours() {
-  Array.from($colors.querySelectorAll('input')).forEach(($input) => {
-    $input.checked = false;
-  });
-}
-
-function setColours(colors) {
-  resetColours();
-  colors.forEach((color) => {
-    $input = document.getElementById(color);
-    $input.checked = true;
-  });
-}
-
-function getActiveColors() {
-  return Array.from($colors.querySelectorAll('input'))
-    .filter((color) => color.checked)
-    .map((color) => color.name);
-}
-
-// Create all checkboxes
-createAllCheckboxes(colorSchema);
-
-// Set radius to default
-$radius.value = defaultRadius;
-$radius_display_value.innerText = defaultRadius;
-
-// Set threshold to default
-$threshold.value = defaultThreshold;
-$threshold_display_value.innerText = defaultThreshold;
-
-// Set schema to default
-$schema.value = defaultSchemaValue;

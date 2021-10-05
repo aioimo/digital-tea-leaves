@@ -1,10 +1,7 @@
 let interval;
 
 // Initialisation
-const defaultColors = getActiveColors();
-
-updateColorsStatisticsBoard(defaultColors);
-updateRadiusValue(defaultRadius);
+const defaultColors = colorSchema.map((s) => s.color);
 
 // window.onload = () => {
 //   if (EDIT_MODE) {
@@ -12,76 +9,14 @@ updateRadiusValue(defaultRadius);
 //   }
 // };
 
-const matrix = new Matrix(
+const game = new GameBoard(
   defaultColors,
   defaultGridSize,
   defaultRadius,
   defaultThreshold
 );
-const radiusDisplay = new RadiusDisplay({ radius: defaultRadius });
-
-// Special Effects
-function handle69(n) {
-  if (n === 69) {
-    $hiddenSurprise.classList.remove('hidden');
-    $hiddenSurprise.innerText = ';)';
-  }
-}
-
-function clearAfterEffects() {
-  $hiddenSurprise.classList.add('hidden');
-  $hiddenSurprise.innerText = '';
-}
-
-function onAfterEffect(matrix) {
-  handle69(matrix.numberIterations);
-}
 
 // Handlers
-function handleStop(matrix) {
-  $shuffle.classList.remove('hidden');
-  $reset.classList.remove('hidden');
-  clearInterval(interval);
-  // $start.innerText = 'START';
-  // $start.classList.add('start-button');
-  // $start.classList.remove('red');
-  $radius.disabled = false;
-  $threshold.disabled = false;
-  interval = null;
-  onAfterEffect(matrix);
-  handleData(matrix);
-}
-
-function handleStart() {
-  $shuffle.classList.add('hidden');
-  // $start.innerText = 'STOP';
-  // $start.classList.add('red');
-  // $start.classList.remove('start-button');
-  $radius.disabled = true;
-  $colors.disabled = true;
-  $threshold.disabled = true;
-}
-
-function handleRadiusChange(value) {
-  $radius.value = value;
-  updateRadiusValue(value);
-  radiusDisplay.updateRadius(value);
-  matrix.updateRadius(value);
-}
-
-function handleThresholdChange(value) {
-  $threshold.value = value;
-  updateThresholdDisplayValue(value);
-  matrix.updateThreshold(value);
-}
-
-function handleSchemaChange(value) {
-  $schema.value = value;
-  filterSchema = chooseSchema(value);
-  radiusDisplay.setup();
-  matrix.stable = false;
-}
-
 function handleShuffle() {
   window.location.reload();
 }
@@ -90,41 +25,34 @@ function handleShuffle() {
 $shuffle.onclick = handleShuffle;
 
 $colors.onchange = function () {
-  const colors = getActiveColors();
-  updateColorsStatisticsBoard(colors);
-  matrix.updateColors(colors);
-  matrix.reset();
+  game.handleColorChange();
 };
 
 $next.onclick = function () {
-  matrix.update();
+  game.nextState();
   $colors.disabled = true;
 };
 
 $reset.onclick = function () {
-  matrix.reset();
-  $colors.disabled = false;
-  $reset.classList.add('hidden');
-  $start.classList.remove('hidden');
-  clearAfterEffects();
+  game.reset();
 };
 
 $schema.onchange = function (e) {
   const schema = e.target.value;
-  handleSchemaChange(schema);
+  game.handleSchemaChange(schema);
 };
 
 $start.onclick = function () {
   $start.classList.add('hidden');
 
   if (interval) {
-    handleStop();
+    game.handleGameEnd();
   } else {
-    handleStart();
+    game.handleStart();
     interval = setInterval(() => {
-      matrix.update();
-      if (matrix.stable) {
-        handleStop(matrix);
+      game.nextState();
+      if (game.isStable()) {
+        game.handleGameEnd();
       }
     }, 75);
   }
@@ -132,22 +60,22 @@ $start.onclick = function () {
 
 $radius.oninput = function (e) {
   const radius = e.target.value;
-  handleRadiusChange(radius);
+  game.setRadius(radius);
 };
 
 $radius.onchange = function (e) {
   const radius = e.target.value;
-  handleRadiusChange(radius);
+  game.setRadius(radius);
 };
 
 $threshold.oninput = function (e) {
-  const threshold = e.target.value;
-  handleThresholdChange(threshold);
+  const value = e.target.value;
+  game.setThreshold(value);
 };
 
 $threshold.onchange = function (e) {
-  const threshold = e.target.value;
-  handleThresholdChange(threshold);
+  const value = e.target.value;
+  game.setThreshold(value);
 };
 
 $favorites.onchange = function (e) {
@@ -166,11 +94,11 @@ $favorites.onchange = function (e) {
 
   const newColors = pickN(allColors, n);
 
-  setColours(newColors);
-  updateColorsStatisticsBoard(newColors);
-  handleThresholdChange(threshold);
-  handleRadiusChange(radius);
-  handleSchemaChange(schema);
-  matrix.updateColors(newColors);
-  matrix.reset();
+  game.setColours(newColors);
+  game.updateColorsStatisticsBoard();
+  game.setThreshold(threshold);
+  game.setRadius(radius);
+  game.handleSchemaChange(schema);
+  game.setColors(newColors);
+  game.reset();
 };
