@@ -13,6 +13,17 @@ class Matrix {
     this.stats = {};
   }
 
+  runUntilStable() {
+    let tries = 0;
+    while (!this.stable) {
+      this.nextState();
+      tries++;
+      if (tries > 500) {
+        throw 'DID NOT CONVERGE';
+      }
+    }
+  }
+
   nextState() {
     this.numberIterations++;
     const currentState = this.state;

@@ -12,6 +12,10 @@ function getStandardDeviation(array) {
 
 function nsd(matrix) {
   const array = Object.values(matrix.stats);
+  while (array.length < matrix.colors.length) {
+    array.push(0);
+  }
+
   return getStandardDeviation(array) / matrix.size ** 2;
 }
 
