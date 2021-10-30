@@ -1,7 +1,3 @@
-function getIterationsKey(id) {
-  return 'iterations-' + id;
-}
-
 function getStandardDeviation(array) {
   const n = array.length;
   const mean = array.reduce((a, b) => a + b) / n;
@@ -20,7 +16,6 @@ function nsd(matrix) {
 }
 
 function handleData(matrix) {
-  console.log('MATRIX', matrix);
   const { stats } = matrix;
   console.log(stats);
   console.log('getStandardDeviation', nsd(matrix));
