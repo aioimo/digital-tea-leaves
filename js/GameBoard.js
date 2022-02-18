@@ -6,6 +6,7 @@ function getActiveColorsFromDom() {
 
 class GameBoard {
   constructor(colors, gridSize, radius, threshold) {
+    this.gameId = genRanHex(6);
     this.matrix = new Matrix(colors, gridSize, radius, threshold);
     this.radiusDisplay = new RadiusDisplay({
       radius,
