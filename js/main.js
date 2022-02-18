@@ -51,10 +51,12 @@ $start.onclick = function () {
     game.handleStart();
     interval = setInterval(() => {
       game.nextState();
+      // Uncomment following line to save each step
+      // downloadCanvasImage(`${game.gameId}_${game.matrix.numberIterations}`)
       if (game.isStable()) {
         game.handleGameEnd();
       }
-    }, 75);
+    }, 100);
   }
 };
 

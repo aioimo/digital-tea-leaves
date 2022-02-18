@@ -173,3 +173,21 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
     ctx.stroke();
   }
 }
+
+function saveAs(blob, filename) {
+  const url = URL.createObjectURL(blob); // Create the URL from the blob object
+  const a = document.createElement('a'); // Create the anchor tag
+  a.href = url; // Assign the URL string to the anchor tag's href attribute
+  a.download = filename; // Name the image by assigning the anchor tag's download attribute
+  document.body.appendChild(a); // Append the anchor tag to the DOM
+  a.click(); // Click the anchor tag to trigger the download
+  document.body.removeChild(a); // Remove the anchor tag from the DOM
+  URL.revokeObjectURL(url); // Release the reference to the ObjectURL
+}
+
+function downloadCanvasImage(filename) {
+  // Dump the canvas contents to a file.
+  $canvas.toBlob((blob) => {
+    saveAs(blob, `${filename}.png`);
+  }, 'image/png');
+}
